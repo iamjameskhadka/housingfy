@@ -40,10 +40,11 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { name: "Plot", path: "/plot" },
+    { name: "Plot", path: "/plot-land" },
     { name: "Commercial", path: "/commercial" },
-    { name: "About", path: "/about" },
+    { name: "About", path: "/about-us" },
   ];
+
 
   return (
     <nav className="bg-white shadow-md w-full fixed top-0 z-50">

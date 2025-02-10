@@ -72,8 +72,7 @@ const Land = () => {
         {displayedLands.map((land) => (
           <div
             key={land.id}
-            className="bg-white shadow-md rounded-xl overflow-hidden  p-5 lg:p-6 h-[520px] transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
-          >
+            className="bg-white shadow-md rounded-xl overflow-hidden  p-5 lg:p-6 h-[520px] transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
             {/* Image Section */}
             <div className="relative h-[265px]">
               <img src={land.image} alt="Plot" className="w-full h-full object-cover rounded-lg" />
