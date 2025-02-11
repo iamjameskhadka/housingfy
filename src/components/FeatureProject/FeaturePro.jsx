@@ -40,9 +40,9 @@ const FeaturedPro = () => {
   return (
     <div className="w-full py-15 ">
       <h2 className="relative text-2xl font-semibold text-center mb-5 flex items-center justify-center">
-        <span className="w-100 h-[1px] bg-gray-300 hidden sm:block"></span>
+        <span className="w-100 h-[1px] bg-red-500 hidden sm:block"></span>
         <span className="px-4">FEATURED PROJECTS</span>
-        <span className="w-100 h-[1px] bg-gray-300 hidden sm:block"></span>
+        <span className="w-100 h-[1px] bg-red-500 hidden sm:block"></span>
       </h2>
 
 
@@ -56,24 +56,28 @@ const FeaturedPro = () => {
             <div key={index} className="w-full flex-shrink-0 relative">
               {/* Image Placeholder */}
               <div
-                className="h-[550px] bg-cover bg-center"
+                className="h-[300px] sm:h-[400px] md:h-[550px] bg-cover bg-center relative"
                 style={{ backgroundImage: `url('${project.image}')` }}
               >
-                <div className="flex justify-center ">
-                  <button className="mt-120  bg-blur bg-opacity-80 backdrop-blur-md text-black px-4 py-2 rounded-md shadow-md hover:bg-red-500 transition cursor-pointer">
-                    <a href="/know" className="text-black  ">KNOW MORE</a>
-                  </button>
+                {/* Project Info with Know More Button */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  {/* Info Card */}
+                  <div className="w-100 backdrop-blur-sm rounded-lg p-4 text-white">
+                    <h3 className="text-lg sm:text-xl font-bold mb-1">{project.title}</h3>
+                    <p className="text-xs sm:text-sm mb-1">{project.location}</p>
+                    <p className="text-sm sm:text-lg font-semibold mb-1">{project.price}</p>
+                    <p className="text-xs opacity-90 line-clamp-2">{project.details}</p>
+                  </div>
+
+                  {/* Know More Button - Centered */}
+                  <div className="flex justify-center mt-4 mb-4">
+                    <button className=" backdrop-blur-sm text-black px-8 py-2.5 rounded-lg shadow-lg hover:bg-red-500 hover:text-white transition-all duration-300">
+                      <a href="/know" className="text-inherit font-medium text-sm sm:text-base">
+                        KNOW MORE
+                      </a>
+                    </button>
+                  </div>
                 </div>
-
-              </div>
-
-              {/* Overlay Content */}
-              <div className="absolute bg-opacity-80 backdrop-blur-md rounded-md bottom-5 left-5 text-white">
-                <h3 className="text-xl font-bold">{project.title}</h3>
-                <p className="text-sm">{project.location}</p>
-                <p className="text-lg font-semibold">{project.price}</p>
-                <p className="text-xs opacity-90">{project.details}</p>
-
               </div>
             </div>
           ))}

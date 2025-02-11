@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown, ChevronRight, Share2, CalendarCheck, MessageCircle, X } from "lucide-react";
 import FeaturePro from "../components/FeatureProject/FeaturePro";
 import x from '../assets/x.png'
@@ -8,6 +8,19 @@ const Home = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
+
+  // Add this state for scroll position
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  // Add scroll event listener
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <section >
@@ -71,37 +84,73 @@ const Home = () => {
 
         {/* Floating Options */}
         <div
-          className="fixed xl:top-120 lg:top-250 lg:right-4 md:top-180 md:right-4 sm:bottom-6 sm:right-4 top-155 right-4 flex flex-col items-end space-y-2"
+          className={`
+            fixed z-[1000] flex flex-col items-end space-y-2
+            ${scrollPosition > 100
+              ? 'bottom-20 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8'
+              : 'xl:top-120 lg:top-250 lg:right-4 md:top-180 md:right-4 sm:bottom-6 sm:right-4 top-155 right-4'
+            }
+          `}
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
         >
           {/* Floating Action Button */}
           <button
-            className={`relative w-12 h-12 sm:w-16 sm:h-16 rounded-full shadow-lg transition-transform duration-300 flex items-center justify-center ${isOpen ? "rotate-300" : ""
-              }`}
+            className={`
+              relative rounded-full shadow-lg transition-all duration-300 
+              flex items-center justify-center bg-red-500
+              w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16
+              hover:shadow-xl active:scale-95
+              ${isOpen ? "rotate-45" : ""}
+            `}
+            aria-label="Toggle options menu"
           >
-            {/* Animated Circle (Gradient Border) */}
-            {/* <div className="absolute inset-0 w-full h-full rounded-full border-4  flex items-center justify-center"> */}
-            {/* Centered Black 'X' */}
-            <div className="w-10 h-10 sm:w-10 sm:h-10 bg-blue-200 rounded-full flex items-center justify-center">
-              <span className="text-black text-lg sm:text-xl">+</span>
+            <div className={`
+              rounded-full flex items-center justify-center
+              bg-blue-200 transition-all duration-300
+              w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14
+              ${isOpen ? "bg-red-200" : "bg-blue-200"}
+            `}>
+              <span className="text-black text-3xl font-semibold">+</span>
             </div>
-            {/* </div> */}
           </button>
 
-          {/* Options (Appear Above the Button) */}
+          {/* Options Menu */}
           <div
-            className={`absolute bottom-full mb-2 right-0 transition-all duration-300 transform ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
-              }  bg-opacity-80 backdrop-blur-lg p-4 rounded-lg shadow-lg text-black space-y-2`}
+            className={`
+              absolute transition-all duration-300 
+              ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"}
+              ${scrollPosition > 100 ? "bottom-full mb-2" : "top-0 mt-16"}
+              right-0
+            `}
           >
-            <div className="flex items-center space-x-2 cursor-pointer hover:opacity-80">
-              <Share2 size={16} /> <span>Share</span>
-            </div>
-            <div className="flex items-center space-x-2 cursor-pointer hover:opacity-80">
-              <CalendarCheck size={16} /> <span>Schedule Visit</span>
-            </div>
-            <div className="flex items-center space-x-2 cursor-pointer hover:opacity-80">
-              <MessageCircle size={16} /> <span>WhatsApp</span>
+            <div className=" backdrop-blur-md rounded-lg shadow-xl p-3">
+              {/* Share Option */}
+              <button
+                className="flex items-center w-full gap-3 px-4 py-2.5 text-gray-700 hover:bg-gray-100/80 rounded-lg transition-all duration-200"
+                onClick={() => {/* Share handler */ }}
+              >
+                <Share2 className="w-5 h-5" />
+                <span className="whitespace-nowrap text-sm font-medium">Share</span>
+              </button>
+
+              {/* Schedule Visit Option */}
+              <button
+                className="flex items-center w-full gap-3 px-4 py-2.5 text-gray-700 hover:bg-gray-100/80 rounded-lg transition-all duration-200"
+                onClick={() => {/* Schedule handler */ }}
+              >
+                <CalendarCheck className="w-5 h-5" />
+                <span className="whitespace-nowrap text-sm font-medium">Schedule Visit</span>
+              </button>
+
+              {/* WhatsApp Option */}
+              <button
+                className="flex items-center w-full gap-3 px-4 py-2.5 text-gray-700 hover:bg-gray-100/80 rounded-lg transition-all duration-200"
+                onClick={() => {/* WhatsApp handler */ }}
+              >
+                <MessageCircle className="w-5 h-5" />
+                <span className="whitespace-nowrap text-sm font-medium">WhatsApp</span>
+              </button>
             </div>
           </div>
         </div>

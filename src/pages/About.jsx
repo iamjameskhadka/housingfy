@@ -42,25 +42,25 @@ const About = () => {
         {/* Right: Statistics */}
         <div className="w-full lg:w-2/5 mt-8 lg:mt-0">
           <div className="grid grid-cols-2 gap-6 sm:gap-8 text-center border-l border-gray-300 pl-4 sm:pl-8">
-            <div className="p-4 sm:p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div className="p-4 sm:p-6  rounded-lg ">
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-red-500">
                 <CountUp start={0} end={38} duration={5} />+
               </h3>
               <p className="text-sm sm:text-base text-gray-600 mt-2">Years of Excellence</p>
             </div>
-            <div className="p-4 sm:p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div className="p-4 sm:p-6  rounded-lg ">
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-red-500">
                 <CountUp start={0} end={300} duration={5} />+
               </h3>
               <p className="text-sm sm:text-base text-gray-600 mt-2">Projects Completed</p>
             </div>
-            <div className="p-4 sm:p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div className="p-4 sm:p-6  rounded-lg ">
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-red-500">
                 <CountUp start={0} end={180} duration={5} />+
               </h3>
               <p className="text-sm sm:text-base text-gray-600 mt-2">Mn. Sq. Ft. Delivered</p>
             </div>
-            <div className="p-4 sm:p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div className="p-4 sm:p-6  rounded-lg ">
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-red-500">
                 <CountUp start={0} end={170} duration={5} />+
               </h3>
