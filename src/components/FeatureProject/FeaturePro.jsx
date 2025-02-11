@@ -72,7 +72,7 @@ const FeaturedPro = () => {
                   {/* Know More Button - Centered */}
                   <div className="flex justify-center mt-4 mb-4">
                     <button className=" backdrop-blur-sm text-black px-8 py-2.5 rounded-lg shadow-lg hover:bg-red-500 hover:text-white transition-all duration-300">
-                      <a href="/know" className="text-inherit font-medium text-sm sm:text-base">
+                      <a href="/know-more" className="text-inherit font-medium text-sm sm:text-base">
                         KNOW MORE
                       </a>
                     </button>
