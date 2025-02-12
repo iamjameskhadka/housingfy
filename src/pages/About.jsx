@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import navlogo from '../assets/navlogo.png'
 import CountUp from "react-countup";
 import Founders from "../components/Founders/Founders";
+import EnquiryForm from "../components/EnquiryForm/EnquiryForm";
 
 const About = () => {
+  const [showEnquiryForm, setShowEnquiryForm] = useState(false);
+
   return (
     <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 text-gray-800 mt-20">
       {/* Title Section */}
@@ -71,9 +74,21 @@ const About = () => {
       </div>
 
       {/* Enquiry Button */}
-      <button className="fixed right-0 top-1/2 transform -translate-y-1/2 bg-red-500 text-white py-2 px-4 rounded-l-lg shadow-lg rotate-90 hover:bg-red-600 transition-colors duration-300 z-50">
+      <button
+        className="fixed right-0 top-1/2 transform -translate-y-1/2 bg-red-500 text-white py-2 px-4 rounded-l-lg shadow-lg rotate-90 hover:bg-red-600 transition-colors duration-300 z-50"
+        onClick={() => setShowEnquiryForm(true)}
+      >
         <span className="text-sm sm:text-base font-medium">Enquire Now</span>
       </button>
+
+      {/* Enquiry Form Modal */}
+      {showEnquiryForm && (
+        <div className="fixed inset-0 bg-black/50 z-[1000] flex xl:left-280 items-center justify-center p-4 overflow-y-auto">
+          <div className="relative bg-white rounded-lg w-full max-w-md mx-auto my-8 sm:my-0">
+            <EnquiryForm onClose={() => setShowEnquiryForm(false)} />
+          </div>
+        </div>
+      )}
 
       {/* Founders Section */}
       <div className="mt-12 lg:mt-16">

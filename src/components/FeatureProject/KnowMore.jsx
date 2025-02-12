@@ -961,8 +961,8 @@ const KnowMore = () => {
                     type="button"
                     className="flex items-center gap-1 px-2 hover:bg-gray-50 rounded-l"
                   >
-                    <span className="text-base">🇮🇳</span>
-                    <span className="text-gray-600 text-sm">+91</span>
+                    <span className="text-base">🇳🇵</span>
+                    <span className="text-gray-600 text-sm">+977</span>
                   </button>
                   <input
                     type="tel"
