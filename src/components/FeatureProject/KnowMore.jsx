@@ -391,10 +391,10 @@ const KnowMore = () => {
       </div>
 
       {/* Content Sections */}
-      <section className="bg-white">
-        <div className="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8" id="overview">
+      <div className="bg-white">
+        <div className="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8" >
           {/* Overview Section */}
-          <section className="text-center mb-6 sm:mb-8 md:mb-10 mt-6 sm:mt-8 md:mt-16 pt-4 sm:pt-6">
+          <section className="text-center mb-6 sm:mb-8 md:mb-10 mt-6 sm:mt-8 md:mt-16 pt-4 sm:pt-6" id="overview">
             <h2 className="relative text-lg sm:text-xl md:text-2xl font-semibold text-center mb-4 sm:mb-6 flex items-center justify-center">
               <span className="w-8 sm:w-16 md:w-100 h-[1px] bg-red-500 hidden sm:block"></span>
               <span className="px-2 sm:px-4">OVERVIEW</span>
@@ -455,7 +455,7 @@ const KnowMore = () => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Plans Section */}
       <section className="py-6 sm:py-8 md:py-10 px-3 sm:px-4 md:px-6" id="plans">

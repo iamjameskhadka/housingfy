@@ -6,7 +6,8 @@ import KnowMore from '../components/FeatureProject/KnowMore';
 import About from '../pages/About';
 import Commercial from '../components/Commercial/Commercial';
 import Plots from '../components/PlotLand/Plots';
-
+import CommercialDescription from '../components/Commercial/CommercialDescription';
+import PlotDescription from '../components/PlotLand/PlotDescription';
 const Routers = () => {
   return (
     <Routes>
@@ -15,7 +16,9 @@ const Routers = () => {
       <Route path="/know-more" element={<KnowMore />} />
       <Route path="/about-us" element={<About />} />
       <Route path="/commercial" element={<Commercial />} />
+      <Route path="/commercial-description" element={<CommercialDescription />} />
       <Route path="/plot-land" element={<Plots />} />
+      <Route path="/plot-description" element={<PlotDescription />} />
 
     </Routes>
   )

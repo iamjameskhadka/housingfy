@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Link } from 'react-router-dom';
 import EnquiryForm from '../EnquiryForm/EnquiryForm';
 
 const cities = [
@@ -67,14 +67,14 @@ const Commercial = () => {
     <>
       <div className="flex mt-20 flex-col md:flex-row">
         {/* Horizontal Scrollable Sidebar for Mobile/Tablet */}
-        <aside className="w-full md:w-[150px] bg-[#FFFFF8] p-6 overflow-x-auto">
+        <aside className="w-full md:w-[150px] bg-[#FFFFF8] p-4 overflow-x-auto">
           <div className="flex md:flex-col gap-4 min-w-max md:min-w-0">
             {cities.map(({ name, projects }) => (
               <div
                 key={name}
                 onClick={() => setSelectedCity(name)}
                 className={`cursor-pointer p-3 rounded-lg transition whitespace-nowrap
-                  ${selectedCity === name ? "bg-red-200 text-white" : "hover:bg-gray-200"}
+                  ${selectedCity === name ? "bg-red-400 text-white" : "hover:bg-gray-200"}
                 `}
               >
                 <span className="block font-semibold">{name}</span>
@@ -89,66 +89,68 @@ const Commercial = () => {
         {/* Main Content */}
         <main className="w-full md:w-[85%] p-6">
           <h2 className="text-3xl text-left text-red-500 mb-6">Commercial Projects</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects
-              .filter(({ city }) => selectedCity === "All Properties" || city === selectedCity)
-              .map(({ name, location, price, img }) => (
-                <div
-                  key={name}
-                  className="relative bg-white shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:scale-105 h-[450px] min-w-[300px]"
-                  onClick={() => isMobile && setActiveCard(activeCard === name ? null : name)}
-                >
-                  {/* Image Section */}
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={img}
-                      alt={name}
-                      className={`w-full h-[300px] object-cover transition-transform duration-300 
+          <Link to="/commercial-description" >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects
+                .filter(({ city }) => selectedCity === "All Properties" || city === selectedCity)
+                .map(({ name, location, price, img }) => (
+                  <div
+                    key={name}
+                    className="relative bg-white shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:scale-105 h-[450px] min-w-[300px]"
+                    onClick={() => isMobile && setActiveCard(activeCard === name ? null : name)}
+                  >
+                    {/* Image Section */}
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={img}
+                        alt={name}
+                        className={`w-full h-[300px] object-cover transition-transform duration-300 
                         ${isMobile
-                          ? activeCard === name && 'blur-sm scale-105'
-                          : 'group-hover:blur-sm group-hover:scale-105'
-                        }`}
-                    />
-                    <div className="absolute top-0 right-0 bg-green-500 text-white px-3 py-1 text-xs font-bold">
-                      NEW LAUNCH
+                            ? activeCard === name && 'blur-sm scale-105'
+                            : 'group-hover:blur-sm group-hover:scale-105'
+                          }`}
+                      />
+                      <div className="absolute top-0 right-0 bg-green-500 text-white px-3 py-1 text-xs font-bold">
+                        NEW LAUNCH
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Text Section */}
-                  <div className="p-5">
-                    <h3 className="text-2xl truncate">{name}</h3>
-                    <p className="text-gray-500 truncate">{location}</p>
-                    <p className="text-xl font-semibold text-red-500">{price}</p>
-                  </div>
+                    {/* Text Section */}
+                    <div className="p-5">
+                      <h3 className="text-2xl truncate">{name}</h3>
+                      <p className="text-gray-500 truncate">{location}</p>
+                      <p className="text-xl font-semibold text-red-500">{price}</p>
+                    </div>
 
-                  {/* Action Buttons */}
-                  <div className={`
+                    {/* Action Buttons */}
+                    <div className={`
                     absolute bottom-2 left-2 right-2 flex gap-2 transition-all duration-300
                     ${isMobile
-                      ? activeCard === name ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                      : 'opacity-0 group-hover:opacity-100'
-                    }
+                        ? activeCard === name ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                        : 'opacity-0 group-hover:opacity-100'
+                      }
                   `}>
-                    <button
-                      className="flex-1 bg-gray-500 text-white text-center py-3 text-sm flex items-center justify-center gap-2 hover:bg-gray-600"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setShowEnquiryForm(true);
-                      }}
-                    >
-                      📩 Enquire Now
-                    </button>
-                    <a
-                      href="#"
-                      className="flex-1 bg-gray-500 text-white text-center py-3 text-sm flex items-center justify-center gap-2 hover:bg-gray-600"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      📅 Book a Site Visit
-                    </a>
+                      <button
+                        className="flex-1 bg-gray-500 text-white text-center py-3 text-sm flex items-center justify-center gap-2 hover:bg-gray-600"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowEnquiryForm(true);
+                        }}
+                      >
+                        📩 Enquire Now
+                      </button>
+                      <a
+                        href="#"
+                        className="flex-1 bg-gray-500 text-white text-center py-3 text-sm flex items-center justify-center gap-2 hover:bg-gray-600"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        📅 Book a Site Visit
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
-          </div>
+                ))}
+            </div>
+          </Link>
         </main>
       </div>
 
