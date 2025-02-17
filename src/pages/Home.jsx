@@ -51,13 +51,13 @@ const Home = () => {
           <div className="absolute inset-0 bg-black/40" />
 
           {/* Hero Text */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 text-center text-white">
-            <h1 className="text-4xl font-bold mb-4">Find Your Perfect Home</h1>
-            <p className="text-lg">Search from millions of properties across top cities</p>
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 text-center text-white mb-8 sm:mb-0">
+            <h1 className="text-3xl sm:text-4xl font-bold mb-2 sm:mb-4">Find Your Perfect Home</h1>
+            <p className="text-base sm:text-lg mb-8 sm:mb-0">Search from millions of properties across top cities</p>
           </div>
 
           {/* Search Interface */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[95%] sm:w-[90%] max-w-3xl">
+          <div className="absolute top-[55%] sm:top-1/2 left-1/2 -translate-x-1/2 w-[95%] sm:w-[90%] max-w-3xl">
             {/* Tabs */}
             <div className="flex bg-white rounded-t-lg overflow-hidden">
               {["buy", "rent", "commercial"].map((tab) => (
@@ -158,12 +158,12 @@ const Home = () => {
                       </label>
                     </div>
 
-                    <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-                      <div className="relative w-full sm:w-40">
+                    <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto">
+                      <div className="relative w-[48%] sm:w-40">
                         <select
                           value={bhkType}
                           onChange={(e) => setBhkType(e.target.value)}
-                          className="w-full sm:w-40 px-3 sm:px-4 py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-sm sm:text-base"
+                          className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
                         >
                           <option value="">BHK Type</option>
                           <option value="1">1 BHK</option>
@@ -172,7 +172,7 @@ const Home = () => {
                         </select>
                         <FaChevronDown
                           className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-                          size={15}
+                          size={12}
                         />
                       </div>
                     </div>
@@ -214,12 +214,12 @@ const Home = () => {
                       </label>
                     </div>
 
-                    <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-                      <div className="relative w-32">
+                    <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto">
+                      <div className="relative w-[48%] sm:w-40">
                         <select
                           value={bhkType}
                           onChange={(e) => setBhkType(e.target.value)}
-                          className="xl:w-33 sm:w-40 px-3 sm:px-4 py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-sm sm:text-base"
+                          className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
                         >
                           <option value="">BHK Type</option>
                           <option value="1">1 BHK</option>
@@ -228,15 +228,15 @@ const Home = () => {
                         </select>
                         <FaChevronDown
                           className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-                          size={15}
+                          size={12}
                         />
                       </div>
 
-                      <div className="relative w-32">
+                      <div className="relative w-[48%] sm:w-40">
                         <select
                           value={availability}
                           onChange={(e) => setAvailability(e.target.value)}
-                          className="w-full sm:w-40 px-3 sm:px-4 py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-sm sm:text-base"
+                          className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
                         >
                           <option value="">Availability</option>
                           <option value="immediate">Immediate</option>
@@ -244,8 +244,8 @@ const Home = () => {
                           <option value="30days">Within 30 Days</option>
                         </select>
                         <FaChevronDown
-                          className="absolute -right-1 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-                          size={15}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                          size={12}
                         />
                       </div>
                     </div>
@@ -271,25 +271,28 @@ const Home = () => {
                           name="propertyType"
                           checked={propertyType === "Buy"}
                           onChange={() => setPropertyType("Buy")}
-                          className="appearance-none w-5 h-5 border-2 border-gray-300 rounded-full checked:border-red-500 checked:border-[6px] transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                          className="appearance-none w-4 sm:w-5 h-4 sm:h-5 border-2 border-gray-300 rounded-full checked:border-red-500 checked:border-[6px] transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500/20"
                         />
-                        <span className="text-gray-700 group-hover:text-red-500 transition-colors">Buy</span>
+                        <span className="text-sm sm:text-base text-gray-700 group-hover:text-red-500 transition-colors">Buy</span>
                       </label>
                     </div>
 
-                    <select
-                      value={propertyType}
-                      onChange={(e) => setPropertyType(e.target.value)}
-                      className="w-full sm:w-40 px-3 sm:px-4 py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-sm sm:text-base">
-                      <option value="">Property Type</option>
-                      <option value="office">Office Space</option>
-                      <option value="shop">Shop/Showroom</option>
-                      <option value="warehouse">Warehouse/Godown</option>
-                    </select>
-                    <FaChevronDown
-                      className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-                      size={15}
-                    />
+                    <div className="relative w-[48%] sm:w-40">
+                      <select
+                        value={propertyType}
+                        onChange={(e) => setPropertyType(e.target.value)}
+                        className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                      >
+                        <option value="">Property Type</option>
+                        <option value="office">Office Space</option>
+                        <option value="shop">Shop/Showroom</option>
+                        <option value="warehouse">Warehouse/Godown</option>
+                      </select>
+                      <FaChevronDown
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                        size={12}
+                      />
+                    </div>
                   </>
                 )}
               </div>
