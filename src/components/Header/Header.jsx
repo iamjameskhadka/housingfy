@@ -22,11 +22,11 @@ const Header = () => {
   const [agree, setAgree] = useState(false);
   const [openDate, setOpenDate] = useState(false);
   const [openTime, setOpenTime] = useState(false);
-
-  // Update active state when route changes
-  useEffect(() => {
-    setActive(location.pathname);
-  }, [location.pathname]);
+  +
+    // Update active state when route changes
+    useEffect(() => {
+      setActive(location.pathname);
+    }, [location.pathname]);
 
   // Close popup when clicking outside
   useEffect(() => {
@@ -42,6 +42,7 @@ const Header = () => {
   const navLinks = [
     { name: "Plot", path: "/plot-land" },
     { name: "Commercial", path: "/commercial" },
+    // { name: "Rent", path: "/rent" },
     { name: "About", path: "/about-us" },
   ];
 
