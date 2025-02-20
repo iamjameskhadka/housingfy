@@ -392,15 +392,15 @@ const Rent = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 mt-20">
       {/* Hero Section */}
-      <section className="mb-12">
-        <h1 className="text-2xl md:text-3xl font-['Playfair_Display'] text-center font-semibold mb-6 leading-relaxed">
+      <section className="mb-8 sm:mb-12">
+        <h1 className="text-lg sm:text-2xl md:text-3xl font-['Playfair_Display'] text-center font-semibold mb-4 sm:mb-6 leading-relaxed px-4">
           <TypeWriter
             text="Rent Smart with Housingfy – Affordable Rooms & Flats, Zero Brokerage!"
             speed={50}
           />
         </h1>
 
-        <div className="bg-[#fff9f0] rounded-lg p-4 flex flex-col sm:flex-row items-center justify-center gap-8">
+        {/* <div className="bg-[#fff9f0] rounded-lg p-4 flex flex-col sm:flex-row items-center justify-center gap-8">
           <div className="flex items-center gap-2 hover:text-red-500 transition-colors cursor-pointer">
             <BsFileText className="text-xl" />
             <span>Rental Agreement</span>
@@ -412,7 +412,7 @@ const Rent = () => {
           </div>
           <div className="h-6 w-[1px] bg-gray-300 hidden sm:block"></div>
 
-        </div>
+        </div> */}
       </section>
 
       {/* Property Listings Section */}

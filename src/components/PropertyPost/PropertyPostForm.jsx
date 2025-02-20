@@ -72,23 +72,24 @@ const PropertyPostForm = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 overflow-y-auto py-8">
-      <div className="bg-white rounded-lg w-[95%] max-w-3xl p-6 hover:shadow-xl transition-shadow">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold text-red-500">Post Your Property</h2>
+    <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center bg-black/50 overflow-y-auto">
+      <div className="bg-white w-full sm:w-[95%] min-h-screen sm:min-h-fit sm:max-w-3xl sm:rounded-lg p-4 sm:p-6 sm:my-8">
+        {/* Header */}
+        <div className="sticky top-0 z-10 bg-white flex justify-between items-center mb-4 sm:mb-6 pb-2 border-b">
+          <h2 className="text-xl sm:text-2xl font-semibold text-red-500">Post Your Property</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-red-500 hover:bg-red-50 p-2 rounded-full transition-all"
+            className="text-gray-500 hover:text-red-500 hover:bg-red-50 p-1.5 sm:p-2 rounded-full transition-all"
           >
-            <X size={24} />
+            <X size={20} className="sm:w-6 sm:h-6" />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           {/* Basic Details */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="group">
-              <label className="block text-sm font-medium text-gray-700 mb-2 group-hover:text-red-500 transition-colors">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5 group-hover:text-red-500 transition-colors">
                 Property Title
               </label>
               <input
@@ -102,7 +103,7 @@ const PropertyPostForm = ({ onClose }) => {
               />
             </div>
             <div className="group">
-              <label className="block text-sm font-medium text-gray-700 mb-2 group-hover:text-red-500 transition-colors">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5 group-hover:text-red-500 transition-colors">
                 Location
               </label>
               <input
@@ -118,9 +119,9 @@ const PropertyPostForm = ({ onClose }) => {
           </div>
 
           {/* Price Details */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             <div className="group">
-              <label className="block text-sm font-medium text-gray-700 mb-2 group-hover:text-red-500 transition-colors">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5 group-hover:text-red-500 transition-colors">
                 Price
               </label>
               <input
@@ -134,7 +135,7 @@ const PropertyPostForm = ({ onClose }) => {
               />
             </div>
             <div className="group">
-              <label className="block text-sm font-medium text-gray-700 mb-2 group-hover:text-red-500 transition-colors">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5 group-hover:text-red-500 transition-colors">
                 Price per sq.ft.
               </label>
               <input
@@ -148,7 +149,7 @@ const PropertyPostForm = ({ onClose }) => {
               />
             </div>
             <div className="group">
-              <label className="block text-sm font-medium text-gray-700 mb-2 group-hover:text-red-500 transition-colors">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5 group-hover:text-red-500 transition-colors">
                 EMI
               </label>
               <input
@@ -164,9 +165,9 @@ const PropertyPostForm = ({ onClose }) => {
           </div>
 
           {/* Property Details */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
             <div className="group">
-              <label className="block text-sm font-medium text-gray-700 mb-2 group-hover:text-red-500 transition-colors">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5 group-hover:text-red-500 transition-colors">
                 Size (sqft)
               </label>
               <input
@@ -180,7 +181,7 @@ const PropertyPostForm = ({ onClose }) => {
               />
             </div>
             <div className="group">
-              <label className="block text-sm font-medium text-gray-700 mb-2 group-hover:text-red-500 transition-colors">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5 group-hover:text-red-500 transition-colors">
                 Facing
               </label>
               <select
@@ -202,7 +203,7 @@ const PropertyPostForm = ({ onClose }) => {
               </select>
             </div>
             <div className="group">
-              <label className="block text-sm font-medium text-gray-700 mb-2 group-hover:text-red-500 transition-colors">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5 group-hover:text-red-500 transition-colors">
                 Type
               </label>
               <select
@@ -223,7 +224,7 @@ const PropertyPostForm = ({ onClose }) => {
               </select>
             </div>
             <div className="group">
-              <label className="block text-sm font-medium text-gray-700 mb-2 group-hover:text-red-500 transition-colors">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5 group-hover:text-red-500 transition-colors">
                 Bathrooms
               </label>
               <select
@@ -245,8 +246,8 @@ const PropertyPostForm = ({ onClose }) => {
 
           {/* Image Upload */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Property Images</label>
-            <div className="border-2 border-dashed rounded-lg p-4 hover:border-red-300 transition-colors">
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Property Images</label>
+            <div className="border-2 border-dashed rounded-lg p-3 sm:p-4 hover:border-red-300 transition-colors">
               <input
                 type="file"
                 multiple
@@ -257,29 +258,29 @@ const PropertyPostForm = ({ onClose }) => {
               />
               <label
                 htmlFor="images"
-                className="flex flex-col items-center justify-center cursor-pointer hover:scale-105 transition-transform"
+                className="flex flex-col items-center justify-center cursor-pointer hover:scale-105 transition-transform py-4"
               >
-                <MdCloudUpload className="text-4xl text-gray-400 group-hover:text-red-500" />
-                <span className="mt-2 text-sm text-gray-500 group-hover:text-red-500">
+                <MdCloudUpload className="text-3xl sm:text-4xl text-gray-400 group-hover:text-red-500" />
+                <span className="mt-2 text-xs sm:text-sm text-gray-500 group-hover:text-red-500">
                   Click to upload images
                 </span>
               </label>
             </div>
             {formData.images.length > 0 && (
-              <div className="mt-4 grid grid-cols-4 gap-4">
+              <div className="mt-3 sm:mt-4 grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-4">
                 {formData.images.map((image, index) => (
                   <div key={index} className="relative group">
                     <img
                       src={image}
                       alt={`Preview ${index + 1}`}
-                      className="w-full h-24 object-cover rounded-lg transition-transform group-hover:scale-105"
+                      className="w-full h-20 sm:h-24 object-cover rounded-lg transition-transform group-hover:scale-105"
                     />
                     <button
                       type="button"
                       onClick={() => removeImage(index)}
                       className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
                     >
-                      <X size={16} />
+                      <X size={14} className="sm:w-4 sm:h-4" />
                     </button>
                   </div>
                 ))}
@@ -288,17 +289,17 @@ const PropertyPostForm = ({ onClose }) => {
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-end gap-4">
+          <div className="flex justify-end gap-3 sm:gap-4 sticky bottom-0 bg-white pt-2 border-t mt-4">
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-red-300 transition-all"
+              className="px-4 sm:px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-red-300 transition-all text-sm"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 hover:shadow-lg transform hover:-translate-y-0.5 transition-all"
+              className="px-4 sm:px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 hover:shadow-lg transform hover:-translate-y-0.5 transition-all text-sm"
             >
               Post Property
             </button>
