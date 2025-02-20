@@ -3,6 +3,8 @@ import { Share2, CalendarCheck, MessageCircle } from "lucide-react";
 import { MdLocationOn } from "react-icons/md";
 import { FaSearch, FaChevronDown } from 'react-icons/fa';
 import FeaturePro from "../components/FeatureProject/FeaturePro";
+import SharePopup from '../components/Share/SharePopup';
+import ScheduleVisitForm from '../components/ScheduleVisit/ScheduleVisitForm';
 
 const Home = () => {
   // Search States
@@ -10,7 +12,7 @@ const Home = () => {
   const [location, setLocation] = useState("Mumbai");
   const [showCityDropdown, setShowCityDropdown] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [propertyType, setPropertyType] = useState("Full House");
+  const [propertyType, setPropertyType] = useState("");
   const [bhkType, setBhkType] = useState("");
   const [availability, setAvailability] = useState("");
 
@@ -20,6 +22,14 @@ const Home = () => {
 
   // City Options
   const cities = ["Mumbai", "Delhi", "Bangalore", "Pune", "Chennai"];
+
+  // Add these new states at the top with other states
+  const [propertyStatus, setPropertyStatus] = useState("");
+  const [showNewProjects, setShowNewProjects] = useState(false);
+
+  // Add these states in the Home component
+  const [showSharePopup, setShowSharePopup] = useState(false);
+  const [showScheduleForm, setShowScheduleForm] = useState(false);
 
   // Scroll Handler
   useEffect(() => {
@@ -40,6 +50,12 @@ const Home = () => {
     });
   };
 
+  // Add handleWhatsApp function
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent("Hi, I'm interested in your property listing");
+    window.open(`https://wa.me/YOUR_PHONE_NUMBER?text=${message}`, '_blank');
+  };
+
   return (
     <section>
       <div className="relative w-full min-h-screen flex flex-col">
@@ -53,21 +69,38 @@ const Home = () => {
           {/* Hero Text */}
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 text-center text-white mb-8 sm:mb-0">
             <h1 className="text-3xl sm:text-4xl font-bold mb-2 sm:mb-4">Find Your Perfect Home</h1>
-            <p className="text-base sm:text-lg mb-8 sm:mb-0">Search from millions of properties across top cities</p>
+            <p className="text-base sm:text-lg">Search from millions of properties across top cities</p>
           </div>
 
           {/* Search Interface */}
-          <div className="absolute top-[55%] sm:top-1/2 left-1/2 -translate-x-1/2 w-[95%] sm:w-[90%] max-w-3xl">
+          <section className="absolute top-[55%] sm:top-1/2 left-1/2 -translate-x-1/2 w-[100%] sm:w-[90%] max-w-7xl">
             {/* Tabs */}
-            <div className="flex bg-white rounded-t-lg overflow-hidden">
+            <div className="flex  backdrop-blur-md  rounded-t-lg overflow-hidden divide-x divide-gray-200">
               {["buy", "rent", "commercial"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`flex-1 py-2 sm:py-3 text-center capitalize text-sm sm:text-base font-medium ${activeTab === tab ? "bg-red-500 text-white" : "text-gray-700 hover:bg-gray-50"
-                    }`}
+                  className={`
+                    relative flex-1 py-3 text-center capitalize text-sm sm:text-base font-medium
+                    ${activeTab === tab
+                      ? "text-red-500"
+                      : "text-white hover:text-red-500"
+                    }
+                    transition-colors duration-200
+                  `}
                 >
                   {tab}
+                  {/* Underline */}
+                  <div
+                    className={`
+                      absolute bottom-0 left-0 w-full h-0.5
+                      ${activeTab === tab
+                        ? "bg-red-500"
+                        : "bg-transparent"
+                      }
+                      transition-colors duration-200
+                    `}
+                  />
                 </button>
               ))}
             </div>
@@ -133,6 +166,7 @@ const Home = () => {
 
               {/* Property Filters based on active tab */}
               <div className="flex flex-wrap gap-3 sm:gap-4">
+                {/* Buy Tab Content */}
                 {activeTab === "buy" && (
                   <>
                     <div className="flex flex-wrap sm:flex-nowrap gap-3 sm:gap-4 w-full sm:w-auto">
@@ -141,7 +175,12 @@ const Home = () => {
                           type="radio"
                           name="propertyType"
                           checked={propertyType === "Full House"}
-                          onChange={() => setPropertyType("Full House")}
+                          onChange={() => {
+                            setPropertyType("Full House");
+                            setBhkType("");
+                            setPropertyStatus("");
+                            setShowNewProjects(false);
+                          }}
                           className="appearance-none w-4 sm:w-5 h-4 sm:h-5 border-2 border-gray-300 rounded-full checked:border-red-500 checked:border-[6px] transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500/20"
                         />
                         <span className="text-sm sm:text-base text-gray-700 group-hover:text-red-500 transition-colors">Full House</span>
@@ -151,34 +190,87 @@ const Home = () => {
                           type="radio"
                           name="propertyType"
                           checked={propertyType === "Land/Plot"}
-                          onChange={() => setPropertyType("Land/Plot")}
+                          onChange={() => {
+                            setPropertyType("Land/Plot");
+                            setPropertyStatus("");
+                          }}
                           className="appearance-none w-5 h-5 border-2 border-gray-300 rounded-full checked:border-red-500 checked:border-[6px] transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500/20"
                         />
                         <span className="text-gray-700 group-hover:text-red-500 transition-colors">Land/Plot</span>
                       </label>
                     </div>
 
-                    <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto">
-                      <div className="relative w-[48%] sm:w-40">
-                        <select
-                          value={bhkType}
-                          onChange={(e) => setBhkType(e.target.value)}
-                          className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
-                        >
-                          <option value="">BHK Type</option>
-                          <option value="1">1 BHK</option>
-                          <option value="2">2 BHK</option>
-                          <option value="3">3 BHK</option>
-                        </select>
-                        <FaChevronDown
-                          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-                          size={12}
-                        />
+                    {propertyType === "Full House" && (
+                      <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto">
+                        <div className="relative w-[48%] sm:w-40">
+                          <select
+                            value={bhkType}
+                            onChange={(e) => setBhkType(e.target.value)}
+                            className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                          >
+                            <option value="">BHK Type</option>
+                            <option value="1">1 BHK</option>
+                            <option value="2">2 BHK</option>
+                            <option value="3">3 BHK</option>
+                          </select>
+                          <FaChevronDown
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                            size={12}
+                          />
+                        </div>
+
+                        <div className="relative w-[48%] sm:w-40">
+                          <select
+                            value={propertyStatus}
+                            onChange={(e) => setPropertyStatus(e.target.value)}
+                            className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                          >
+                            <option value="">Property Status</option>
+                            <option value="ready">Ready to Move</option>
+                            <option value="under-construction">Under Construction</option>
+                          </select>
+                          <FaChevronDown
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                            size={12}
+                          />
+                        </div>
+
+                        <label className="flex items-center gap-2 cursor-pointer group">
+                          <input
+                            type="checkbox"
+                            checked={showNewProjects}
+                            onChange={(e) => setShowNewProjects(e.target.checked)}
+                            className="w-4 h-4 rounded border-gray-300 text-red-500 focus:ring-red-500"
+                          />
+                          <span className="text-xs sm:text-sm text-gray-700 group-hover:text-red-500 transition-colors">New Builder Projects</span>
+                        </label>
                       </div>
-                    </div>
+                    )}
+
+                    {propertyType === "Land/Plot" && (
+                      <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto">
+                        <div className="relative w-[48%] sm:w-40">
+                          <select
+                            value={propertyStatus}
+                            onChange={(e) => setPropertyStatus(e.target.value)}
+                            className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                          >
+                            <option value="">Plot Type</option>
+                            <option value="residential">Residential</option>
+                            <option value="commercial">Commercial</option>
+                            <option value="agricultural">Agricultural</option>
+                          </select>
+                          <FaChevronDown
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                            size={12}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </>
                 )}
 
+                {/* Rent Tab Content */}
                 {activeTab === "rent" && (
                   <>
                     <div className="flex flex-wrap sm:flex-nowrap gap-3 sm:gap-4 w-full sm:w-auto">
@@ -187,7 +279,11 @@ const Home = () => {
                           type="radio"
                           name="propertyType"
                           checked={propertyType === "Full House"}
-                          onChange={() => setPropertyType("Full House")}
+                          onChange={() => {
+                            setPropertyType("Full House");
+                            setBhkType("");
+                            setAvailability("");
+                          }}
                           className="appearance-none w-4 sm:w-5 h-4 sm:h-5 border-2 border-gray-300 rounded-full checked:border-red-500 checked:border-[6px] transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500/20"
                         />
                         <span className="text-sm sm:text-base text-gray-700 group-hover:text-red-500 transition-colors">Full House</span>
@@ -196,11 +292,11 @@ const Home = () => {
                         <input
                           type="radio"
                           name="propertyType"
-                          checked={propertyType === "PG/Hostel"}
-                          onChange={() => setPropertyType("PG/Hostel")}
+                          checked={propertyType === "Rooms"}
+                          onChange={() => setPropertyType("Rooms")}
                           className="appearance-none w-5 h-5 border-2 border-gray-300 rounded-full checked:border-red-500 checked:border-[6px] transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500/20"
                         />
-                        <span className="text-gray-700 group-hover:text-red-500 transition-colors">PG/Hostel</span>
+                        <span className="text-gray-700 group-hover:text-red-500 transition-colors">Rooms</span>
                       </label>
                       <label className="flex items-center gap-3 cursor-pointer group">
                         <input
@@ -214,41 +310,153 @@ const Home = () => {
                       </label>
                     </div>
 
-                    <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto">
-                      <div className="relative w-[48%] sm:w-40">
-                        <select
-                          value={bhkType}
-                          onChange={(e) => setBhkType(e.target.value)}
-                          className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
-                        >
-                          <option value="">BHK Type</option>
-                          <option value="1">1 BHK</option>
-                          <option value="2">2 BHK</option>
-                          <option value="3">3 BHK</option>
-                        </select>
-                        <FaChevronDown
-                          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-                          size={12}
-                        />
-                      </div>
+                    {propertyType === "Full House" && (
+                      <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto">
+                        <div className="relative w-[48%] sm:w-40">
+                          <select
+                            value={bhkType}
+                            onChange={(e) => setBhkType(e.target.value)}
+                            className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                          >
+                            <option value="">BHK Type</option>
+                            <option value="1">1 BHK</option>
+                            <option value="2">2 BHK</option>
+                            <option value="3">3 BHK</option>
+                          </select>
+                          <FaChevronDown
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                            size={12}
+                          />
+                        </div>
 
-                      <div className="relative w-[48%] sm:w-40">
-                        <select
-                          value={availability}
-                          onChange={(e) => setAvailability(e.target.value)}
-                          className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
-                        >
-                          <option value="">Availability</option>
-                          <option value="immediate">Immediate</option>
-                          <option value="15days">Within 15 Days</option>
-                          <option value="30days">Within 30 Days</option>
-                        </select>
-                        <FaChevronDown
-                          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-                          size={12}
-                        />
+                        <div className="relative w-[48%] sm:w-40">
+                          <select
+                            value={availability}
+                            onChange={(e) => setAvailability(e.target.value)}
+                            className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                          >
+                            <option value="">Availability</option>
+                            <option value="immediate">Immediate</option>
+                            <option value="15days">Within 15 Days</option>
+                            <option value="30days">Within 30 Days</option>
+                          </select>
+                          <FaChevronDown
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                            size={12}
+                          />
+                        </div>
                       </div>
-                    </div>
+                    )}
+
+                    {propertyType === "Rooms" && (
+                      <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto">
+                        <div className="relative w-[48%] sm:w-40">
+                          <select
+                            value={bhkType}
+                            onChange={(e) => setBhkType(e.target.value)}
+                            className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                          >
+                            <option value="">Room Type</option>
+                            <option value="single">Single</option>
+                            <option value="double">Double</option>
+                            <option value="triple">Triple</option>
+                          </select>
+                          <FaChevronDown
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                            size={12}
+                          />
+                        </div>
+
+                        <div className="relative w-[48%] sm:w-40">
+                          <select
+                            value={propertyStatus}
+                            onChange={(e) => setPropertyStatus(e.target.value)}
+                            className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                          >
+                            <option value="">Preferred Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="any">Any</option>
+                          </select>
+                          <FaChevronDown
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                            size={12}
+                          />
+                        </div>
+
+                        <div className="relative w-[48%] sm:w-40">
+                          <select
+                            value={availability}
+                            onChange={(e) => setAvailability(e.target.value)}
+                            className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                          >
+                            <option value="">Availability</option>
+                            <option value="immediate">Immediate</option>
+                            <option value="15days">Within 15 Days</option>
+                            <option value="30days">Within 30 Days</option>
+                          </select>
+                          <FaChevronDown
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                            size={12}
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {propertyType === "Flatmates" && (
+                      <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto">
+                        <div className="relative w-[48%] sm:w-40">
+                          <select
+                            value={bhkType}
+                            onChange={(e) => setBhkType(e.target.value)}
+                            className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                          >
+                            <option value="">BHK Type</option>
+                            <option value="1">1 BHK</option>
+                            <option value="2">2 BHK</option>
+                            <option value="3">3 BHK</option>
+                          </select>
+                          <FaChevronDown
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                            size={12}
+                          />
+                        </div>
+
+                        <div className="relative w-[48%] sm:w-40">
+                          <select
+                            value={propertyStatus}
+                            onChange={(e) => setPropertyStatus(e.target.value)}
+                            className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                          >
+                            <option value="">Preferred Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="any">Any</option>
+                          </select>
+                          <FaChevronDown
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                            size={12}
+                          />
+                        </div>
+
+                        <div className="relative w-[48%] sm:w-40">
+                          <select
+                            value={availability}
+                            onChange={(e) => setAvailability(e.target.value)}
+                            className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                          >
+                            <option value="">Availability</option>
+                            <option value="immediate">Immediate</option>
+                            <option value="15days">Within 15 Days</option>
+                            <option value="30days">Within 30 Days</option>
+                          </select>
+                          <FaChevronDown
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                            size={12}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </>
                 )}
 
@@ -258,9 +466,12 @@ const Home = () => {
                       <label className="flex items-center gap-2 sm:gap-3 cursor-pointer group">
                         <input
                           type="radio"
-                          name="propertyType"
+                          name="commercialType"
                           checked={propertyType === "Rent"}
-                          onChange={() => setPropertyType("Rent")}
+                          onChange={() => {
+                            setPropertyType("Rent");
+                            setPropertyStatus("");
+                          }}
                           className="appearance-none w-4 sm:w-5 h-4 sm:h-5 border-2 border-gray-300 rounded-full checked:border-red-500 checked:border-[6px] transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500/20"
                         />
                         <span className="text-sm sm:text-base text-gray-700 group-hover:text-red-500 transition-colors">Rent</span>
@@ -268,7 +479,7 @@ const Home = () => {
                       <label className="flex items-center gap-3 cursor-pointer group">
                         <input
                           type="radio"
-                          name="propertyType"
+                          name="commercialType"
                           checked={propertyType === "Buy"}
                           onChange={() => setPropertyType("Buy")}
                           className="appearance-none w-4 sm:w-5 h-4 sm:h-5 border-2 border-gray-300 rounded-full checked:border-red-500 checked:border-[6px] transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500/20"
@@ -277,27 +488,50 @@ const Home = () => {
                       </label>
                     </div>
 
-                    <div className="relative w-[48%] sm:w-40">
-                      <select
-                        value={propertyType}
-                        onChange={(e) => setPropertyType(e.target.value)}
-                        className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
-                      >
-                        <option value="">Property Type</option>
-                        <option value="office">Office Space</option>
-                        <option value="shop">Shop/Showroom</option>
-                        <option value="warehouse">Warehouse/Godown</option>
-                      </select>
-                      <FaChevronDown
-                        className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-                        size={12}
-                      />
-                    </div>
+                    {propertyType && (
+                      <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto">
+                        <div className="relative w-[48%] sm:w-40">
+                          <select
+                            value={propertyStatus}
+                            onChange={(e) => setPropertyStatus(e.target.value)}
+                            className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                          >
+                            <option value="">Property Type</option>
+                            <option value="office">Office Space</option>
+                            <option value="shop">Shop/Showroom</option>
+                            <option value="warehouse">Warehouse/Godown</option>
+                            <option value="land">Commercial Land</option>
+                          </select>
+                          <FaChevronDown
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                            size={12}
+                          />
+                        </div>
+
+                        {propertyType === "Buy" && (
+                          <div className="relative w-[48%] sm:w-40">
+                            <select
+                              value={availability}
+                              onChange={(e) => setAvailability(e.target.value)}
+                              className="w-full px-2 sm:px-4 py-2 sm:py-2.5 border rounded-lg flex items-center justify-between hover:border-red-500 focus:border-red-500 focus:outline-none transition-all duration-200 text-xs sm:text-sm"
+                            >
+                              <option value="">Availability</option>
+                              <option value="ready">Ready to Move</option>
+                              <option value="under-construction">Under Construction</option>
+                            </select>
+                            <FaChevronDown
+                              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                              size={12}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </>
                 )}
               </div>
             </div>
-          </div>
+          </section>
         </div>
 
         {/* Floating Action Button */}
@@ -334,15 +568,24 @@ const Home = () => {
           {isOpen && (
             <div className="absolute bottom-full mb-2 right-0">
               <div className="bg-white backdrop-blur-md rounded-lg shadow-xl p-3">
-                <button className="flex items-center w-full gap-3 px-4 py-2.5 text-gray-700 hover:bg-gray-100/80 rounded-lg">
+                <button
+                  onClick={() => setShowSharePopup(true)}
+                  className="flex items-center w-full gap-3 px-4 py-2.5 text-gray-700 hover:bg-gray-100/80 rounded-lg"
+                >
                   <Share2 className="w-5 h-5" />
                   <span className="whitespace-nowrap text-sm font-medium">Share</span>
                 </button>
-                <button className="flex items-center w-full gap-3 px-4 py-2.5 text-gray-700 hover:bg-gray-100/80 rounded-lg">
+                <button
+                  onClick={() => setShowScheduleForm(true)}
+                  className="flex items-center w-full gap-3 px-4 py-2.5 text-gray-700 hover:bg-gray-100/80 rounded-lg"
+                >
                   <CalendarCheck className="w-5 h-5" />
                   <span className="whitespace-nowrap text-sm font-medium">Schedule Visit</span>
                 </button>
-                <button className="flex items-center w-full gap-3 px-4 py-2.5 text-gray-700 hover:bg-gray-100/80 rounded-lg">
+                <button
+                  onClick={handleWhatsApp}
+                  className="flex items-center w-full gap-3 px-4 py-2.5 text-gray-700 hover:bg-gray-100/80 rounded-lg"
+                >
                   <MessageCircle className="w-5 h-5" />
                   <span className="whitespace-nowrap text-sm font-medium">WhatsApp</span>
                 </button>
@@ -358,13 +601,16 @@ const Home = () => {
       </div>
 
       {/* Remove default select styling */}
-      <style jsx global>{`
+      {/* <style jsx global>{`
         select {
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
         }
-      `}</style>
+      `}</style> */}
+
+      {showSharePopup && <SharePopup onClose={() => setShowSharePopup(false)} />}
+      {showScheduleForm && <ScheduleVisitForm onClose={() => setShowScheduleForm(false)} />}
     </section>
   );
 };

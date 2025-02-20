@@ -8,7 +8,7 @@ import Commercial from '../components/Commercial/Commercial';
 import Plots from '../components/PlotLand/Plots';
 import CommercialDescription from '../components/Commercial/CommercialDescription';
 import PlotDescription from '../components/PlotLand/PlotDescription';
-// import Rent from '../components/Rent/Rent';
+import Rent from '../components/Rent/Rent';
 const Routers = () => {
   return (
     <Routes>
@@ -16,7 +16,7 @@ const Routers = () => {
       <Route path="/feature-project" element={<FeaturedPro />} />
       <Route path="/know-more" element={<KnowMore />} />
       <Route path="/about-us" element={<About />} />
-      {/* <Route path="/rent" element={<Rent />} /> */}
+      <Route path="/rent" element={<Rent />} />
       <Route path="/commercial" element={<Commercial />} />
       <Route path="/commercial-description" element={<CommercialDescription />} />
       <Route path="/plot-land" element={<Plots />} />

@@ -42,7 +42,7 @@ const Header = () => {
   const navLinks = [
     { name: "Plot", path: "/plot-land" },
     { name: "Commercial", path: "/commercial" },
-    // { name: "Rent", path: "/rent" },
+    { name: "Rent", path: "/rent" },
     { name: "About", path: "/about-us" },
   ];
 
