@@ -7,6 +7,7 @@ import CountUp from 'react-countup';
 import EnquiryForm from '../EnquiryForm/EnquiryForm';
 import PropertyPostForm from '../PropertyPost/PropertyPostForm';
 import TypeWriter from '../TypeWriter/TypeWriter';
+import { Link } from 'react-router-dom';
 
 const SERVICES = [
   {
@@ -400,7 +401,7 @@ const Rent = () => {
           />
         </h1>
 
-        {/* <div className="bg-[#fff9f0] rounded-lg p-4 flex flex-col sm:flex-row items-center justify-center gap-8">
+        <div className="bg-[#fff9f0] rounded-lg p-4 flex flex-col sm:flex-row items-center justify-center gap-8">
           <div className="flex items-center gap-2 hover:text-red-500 transition-colors cursor-pointer">
             <BsFileText className="text-xl" />
             <span>Rental Agreement</span>
@@ -412,29 +413,31 @@ const Rent = () => {
           </div>
           <div className="h-6 w-[1px] bg-gray-300 hidden sm:block"></div>
 
-        </div> */}
+        </div>
       </section>
 
       {/* Property Listings Section */}
       <section className="mb-16">
-        <div className="grid grid-cols-1 gap-6">
-          {(showAllProperties ? SAMPLE_PROPERTIES : SAMPLE_PROPERTIES.slice(0, 6)).map((property) => (
-            <PropertyCard
-              key={property.id}
-              property={property}
-              onEnquire={() => setShowEnquiryForm(true)}
-            />
-          ))}
-        </div>
+        <Link to="/rent-description">
+          <div className="grid grid-cols-1 gap-6">
+            {(showAllProperties ? SAMPLE_PROPERTIES : SAMPLE_PROPERTIES.slice(0, 6)).map((property) => (
+              <PropertyCard
+                key={property.id}
+                property={property}
+                onEnquire={() => setShowEnquiryForm(true)}
+              />
+            ))}
+          </div>
 
-        <div className="text-center mt-8">
-          <button
-            onClick={() => setShowAllProperties(!showAllProperties)}
-            className="bg-white text-red-500 border-2 border-red-500 px-6 py-2 rounded-lg hover:bg-red-500 hover:text-black transition-colors"
-          >
-            {showAllProperties ? 'Show Less' : 'Show More'}
-          </button>
-        </div>
+          <div className="text-center mt-8">
+            <button
+              onClick={() => setShowAllProperties(!showAllProperties)}
+              className="bg-white text-red-500 border-2 border-red-500 px-6 py-2 rounded-lg hover:bg-red-500 hover:text-black transition-colors"
+            >
+              {showAllProperties ? 'Show Less' : 'Show More'}
+            </button>
+          </div>
+        </Link>
       </section>
 
       {/* Property Owner Section */}
