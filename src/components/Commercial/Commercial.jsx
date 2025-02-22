@@ -74,9 +74,7 @@ const Commercial = () => {
                 key={name}
                 onClick={() => setSelectedCity(name)}
                 className={`cursor-pointer p-3 rounded-lg transition whitespace-nowrap
-                  ${selectedCity === name ? "bg-red-500 text-black" : "hover:bg-gray-200"}
-                `}
-              >
+                  ${selectedCity === name ? "bg-red-500 text-white" : "hover:bg-gray-200"}`}>
                 <span className="block font-semibold">{name}</span>
                 {projects !== "All" && (
                   <span className="text-black text-sm">{projects} Projects</span>
