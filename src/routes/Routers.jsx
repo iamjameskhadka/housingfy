@@ -10,6 +10,8 @@ import CommercialDescription from '../components/Commercial/CommercialDescriptio
 import PlotDescription from '../components/PlotLand/PlotDescription';
 import Rent from '../components/Rent/Rent';
 import RentDescription from '../components/Rent/RentDescription';
+import HomeLandDescription from '../components/Lands/HomeLandDescription';
+import HomePlotDescription from '../components/Plots/HomePlotDescription';
 const Routers = () => {
   return (
     <Routes>
@@ -23,6 +25,8 @@ const Routers = () => {
       <Route path="/plot-land" element={<Plots />} />
       <Route path="/plot-description" element={<PlotDescription />} />
       <Route path="/rent-description" element={<RentDescription />} />
+      <Route path="/lands" element={<HomeLandDescription />} />
+      <Route path="/plots" element={<HomePlotDescription />} />
     </Routes>
   )
 }

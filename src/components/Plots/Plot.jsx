@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MapPin } from "lucide-react";
 import Land from '../../components/Lands/Land'
+import { Link } from "react-router-dom";
 
 const plotData = [
   {
@@ -68,33 +69,35 @@ const Plot = () => {
       )}
 
       {/* Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-        {displayedPlots.map((plot) => (
-          <div
-            key={plot.id}
-            className="bg-white shadow-md rounded-xl overflow-hidden  p-5 lg:p-6 h-[520px] transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
-          >
-            {/* Image Section */}
-            <div className="relative h-[265px]">
-              <img src={plot.image} alt="Plot" className="w-full h-full object-cover rounded-lg" />
-              <span className={`absolute top-2 left-2 text-white text-sm px-3 py-1 rounded-md ${plot.bgColor}`}>
-                {plot.status}
-              </span>
-            </div>
-
-            {/* Card Content (Left-Aligned) */}
-            <div className="p-7 text-left">
-              <h3 className="text-lg font-semibold">{plot.name}</h3>
-              <p className="text-gray-800 font-semibold">{plot.price}</p>
-              <div className="flex items-center gap-2 text-gray-600 text-sm mt-2">
-                <MapPin size={16} />
-                <span>{plot.location}</span>
+      <Link to="/plots">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+          {displayedPlots.map((plot) => (
+            <div
+              key={plot.id}
+              className="bg-white shadow-md rounded-xl overflow-hidden  p-5 lg:p-6 h-[520px] transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
+            >
+              {/* Image Section */}
+              <div className="relative h-[265px]">
+                <img src={plot.image} alt="Plot" className="w-full h-full object-cover rounded-lg" />
+                <span className={`absolute top-2 left-2 text-white text-sm px-3 py-1 rounded-md ${plot.bgColor}`}>
+                  {plot.status}
+                </span>
               </div>
-              <p className="text-red-500 text-sm mt-1">Housingfy</p>
+
+              {/* Card Content (Left-Aligned) */}
+              <div className="p-7 text-left">
+                <h3 className="text-lg font-semibold">{plot.name}</h3>
+                <p className="text-gray-800 font-semibold">{plot.price}</p>
+                <div className="flex items-center gap-2 text-gray-600 text-sm mt-2">
+                  <MapPin size={16} />
+                  <span>{plot.location}</span>
+                </div>
+                <p className="text-red-500 text-sm mt-1">Housingfy</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Link>
       <Land />
     </section>
   );
