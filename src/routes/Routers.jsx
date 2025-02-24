@@ -12,6 +12,7 @@ import Rent from '../components/Rent/Rent';
 import RentDescription from '../components/Rent/RentDescription';
 import HomeLandDescription from '../components/Lands/HomeLandDescription';
 import HomePlotDescription from '../components/Plots/HomePlotDescription';
+import ForgotPassword from '../pages/ForgotPassword';
 const Routers = () => {
   return (
     <Routes>
@@ -25,8 +26,9 @@ const Routers = () => {
       <Route path="/plot-land" element={<Plots />} />
       <Route path="/plot-description" element={<PlotDescription />} />
       <Route path="/rent-description" element={<RentDescription />} />
-      <Route path="/lands" element={<HomeLandDescription />} />
-      <Route path="/plots" element={<HomePlotDescription />} />
+      <Route path="/home-lands" element={<HomeLandDescription />} />
+      <Route path="/home-plots" element={<HomePlotDescription />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
     </Routes>
   )
 }

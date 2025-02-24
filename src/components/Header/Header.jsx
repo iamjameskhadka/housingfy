@@ -120,6 +120,23 @@ const Header = () => {
                   </button>
                 </div>
 
+                {/* Add Remember Me and Forgot Password row */}
+                <div className="flex items-center justify-between">
+                  <label className="flex items-center space-x-2 text-sm text-gray-600 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 rounded border-gray-300 text-red-500 focus:ring-red-500"
+                    />
+                    <span>Remember me</span>
+                  </label>
+                  <Link
+                    to="/forgot-password"
+                    className="text-sm text-red-500 hover:text-red-600 hover:underline"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
+
                 <button className="w-full bg-emerald-600 py-3 text-white rounded-md hover:bg-emerald-700 cursor-pointer">
                   Login
                 </button>
@@ -395,9 +412,20 @@ const Header = () => {
                     </button>
                   </div>
 
-                  <div className="text-right">
-                    <Link to="/forgot-password" className="text-sm text-gray-500 hover:text-gray-700">
-                      Forgot password?
+                  {/* Add Remember Me and Forgot Password row */}
+                  <div className="flex items-center justify-between">
+                    <label className="flex items-center space-x-2 text-sm text-gray-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 rounded border-gray-300 text-red-500 focus:ring-red-500"
+                      />
+                      <span>Remember me</span>
+                    </label>
+                    <Link
+                      to="/forgot-password"
+                      className="text-sm text-red-500 hover:text-red-600 hover:underline"
+                    >
+                      Forgot Password?
                     </Link>
                   </div>
 

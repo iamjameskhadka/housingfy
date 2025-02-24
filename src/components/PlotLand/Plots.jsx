@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import EnquiryForm from '../EnquiryForm/EnquiryForm';
+import ScheduleVisitForm from '../ScheduleVisit/ScheduleVisitForm';
 import { Link } from 'react-router-dom';
 const cities = [
   { name: "All Properties", projects: "All" },
@@ -52,6 +53,7 @@ const Plots = () => {
   const [activeCard, setActiveCard] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [showEnquiryForm, setShowEnquiryForm] = useState(false);
+  const [showScheduleVisitForm, setShowScheduleVisitForm] = useState(false);
 
   // Add window resize listener
   useEffect(() => {
@@ -129,14 +131,20 @@ const Plots = () => {
                     <a
                       href="#"
                       className="flex-1 bg-gray-500 text-white text-center py-3 text-sm flex items-center justify-center gap-2 hover:bg-gray-600"
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowEnquiryForm(true);
+                      }}
                     >
                       📩 Enquire Now
                     </a>
                     <a
                       href="#"
                       className="flex-1 bg-gray-500 text-white text-center py-3 text-sm flex items-center justify-center gap-2 hover:bg-gray-600"
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowScheduleVisitForm(true);
+                      }}
                     >
                       📅 Book a Site Visit
                     </a>
@@ -158,6 +166,15 @@ const Plots = () => {
         <div className="fixed inset-0 bg-black/50 z-[1000] flex xl:left-280 items-center justify-center p-4 overflow-y-auto">
           <div className="relative bg-white rounded-lg w-full max-w-md mx-auto my-8 sm:my-0">
             <EnquiryForm onClose={() => setShowEnquiryForm(false)} />
+          </div>
+        </div>
+      )}
+
+      {/* Schedule Visit Form Modal */}
+      {showScheduleVisitForm && (
+        <div className="fixed inset-0 bg-black/50 z-[1000] flex items-center justify-center p-4 overflow-y-auto">
+          <div className="relative bg-white rounded-lg w-full max-w-md mx-auto my-8 sm:my-0">
+            <ScheduleVisitForm onClose={() => setShowScheduleVisitForm(false)} />
           </div>
         </div>
       )}

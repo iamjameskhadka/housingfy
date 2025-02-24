@@ -5,18 +5,18 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   const quickLinks = [
-    { href: "/about", label: "About Us" },
+    { href: "/about-us", label: "About Us" },
     { href: "/terms", label: "Terms & Conditions" },
     { href: "/property-post", label: "Property Post Demand" },
     { href: "/contact", label: "Contact Us" },
   ];
 
   const propertyLinks = [
-    { href: "/plot", label: "Plot" },
-    { href: "/land", label: "Land" },
+    { href: "/plot-land", label: "Plot" },
+    { href: "/rent", label: "Rent" },
     { href: "/commercial", label: "Commercial" },
-    { href: "/sell-plots", label: "Sell Plots" },
-    { href: "/sell-land", label: "Sell Land" },
+    { href: "/home-plots", label: "Sell Plots" },
+    { href: "/home-lands", label: "Sell Land" },
   ];
 
   const contactInfo = [
