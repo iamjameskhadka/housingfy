@@ -3,3 +3,509 @@
 body {
   font-family: 'Poppins', sans-serif;
 }
+
+/* Custom Scrollbar Styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* For Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+/* Hide scrollbar for Chrome/Safari/Opera but keep functionality */
+.custom-scrollbar.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox but keep functionality */
+.custom-scrollbar.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Smooth Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* For Admin Layout */
+.admin-content {
+  height: calc(100vh - 64px); /* Adjust based on your header height */
+  overflow-y: auto;
+  transition: all 0.3s ease-in-out;
+  isolation: isolate;
+}
+
+.admin-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.admin-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.admin-content::-webkit-scrollbar-thumb {
+  background: #6366f1;
+  border-radius: 3px;
+}
+
+.admin-content::-webkit-scrollbar-thumb:hover {
+  background: #4f46e5;
+}
+
+/* Add these animation keyframes */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 500px;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Add these classes */
+.animate-slideDown {
+  animation: slideDown 0.3s ease-in-out forwards;
+}
+
+.animate-slideRight {
+  animation: slideRight 0.3s ease-in-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+/* Update the existing admin-content class */
+.admin-content {
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Add smooth transitions to menu items */
+.menu-item {
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-item:hover {
+  transform: translateX(4px);
+}
+
+/* Add smooth rotation to dropdown arrows */
+.dropdown-arrow {
+  transition: transform 0.3s ease-in-out;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Smooth scrolling for the entire page */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Animated checkbox */
+.animated-checkbox {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.animated-checkbox input:checked + span {
+  background-color: #ef4444;
+  border-color: #ef4444;
+}
+
+/* Price range slider customization */
+.price-slider {
+  -webkit-appearance: none;
+  height: 2px;
+  background: #ef4444;
+  border-radius: 5px;
+  background-image: linear-gradient(#ef4444, #ef4444);
+  background-repeat: no-repeat;
+}
+
+.price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #ef4444;
+  cursor: pointer;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+}
+
+.price-slider::-webkit-slider-thumb:hover {
+  background: #dc2626;
+}
+
+/* Card hover effects */
+.property-card-hover {
+  transition: all 0.3s ease;
+}
+
+.property-card-hover:hover {
+  transform: translateY(-5px);
+}
+
+/* Filter sidebar animations */
+.filter-section {
+  animation: slideIn 0.3s ease-out;
+  isolation: isolate;
+  position: relative;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Loading skeleton animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Sidebar specific scrollbar */
+.sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #e5e7eb transparent;
+  overflow-x: visible !important; /* Keep dropdowns visible */
+  overflow-y: auto;
+}
+
+.sidebar-scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px; /* Add height for horizontal scrollbar */
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background-color: #e5e7eb;
+  border-radius: 20px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #d1d5db;
+}
+
+/* Sticky section headers */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+  padding: 1rem 0;
+}
+
+/* Property Details Page Specific Styles */
+.tour-form input[type="date"],
+.tour-form input[type="time"] {
+  color-scheme: light;
+}
+
+.tour-form input:focus,
+.tour-form textarea:focus {
+  outline: none;
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+.social-links a {
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  transform: translateY(-2px);
+}
+
+/* Map container animation */
+.map-container {
+  transition: all 0.3s ease;
+}
+
+.map-container:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Review section styles */
+.review-image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+}
+
+.review-image {
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.review-image:hover {
+  transform: scale(1.05);
+}
+
+/* Feature icon animations */
+.feature-icon {
+  transition: all 0.3s ease;
+}
+
+.feature-icon:hover {
+  transform: scale(1.1);
+  background-color: var(--hover-color);
+}
+
+/* Rating stars animation */
+.rating-star {
+  transition: all 0.2s ease;
+}
+
+.rating-star:hover {
+  transform: scale(1.2);
+}
+
+/* Image carousel animations */
+.carousel-image {
+  transition: all 0.2s ease-in-out;
+}
+
+.carousel-button {
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.carousel-container:hover .carousel-button {
+  opacity: 1;
+}
+
+/* Property info card hover effects */
+.property-info-card {
+  transition: all 0.3s ease;
+}
+
+.property-info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Favorite button animation */
+.favorite-button {
+  transition: all 0.3s ease;
+}
+
+.favorite-button:hover {
+  transform: scale(1.1);
+}
+
+.favorite-button.active {
+  animation: pulse 1s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Update Sidebar base styles */
+.admin-sidebar {
+  position: relative;
+  z-index: 40;
+  isolation: isolate;
+  /* overflow: hidden; Hide base overflow */
+}
+
+/* Container for scrollable content */
+.sidebar-scroll {
+  position: relative;
+  height: 100%;
+  /* overflow-y: auto; */
+  /* overflow-x: hidden; Hide horizontal scroll */
+  scrollbar-width: thin;
+  scrollbar-color: hsl(0, 66%, 53%) transparent;
+}
+
+/* Dropdown container positioning */
+.admin-sidebar-content {
+  position: relative;
+  width: 100%;
+  padding-right: 1rem; /* Add space for dropdowns */
+}
+
+/* Menu item container */
+.admin-sidebar-item {
+  position: relative;
+}
+
+/* Group hover handling */
+.admin-sidebar .group {
+  position: relative;
+}
+
+.admin-sidebar .group:hover {
+  z-index: 50;
+}
+
+/* Dropdown positioning */
+.admin-sidebar .dropdown-menu,
+.tooltip {
+  position: fixed; /* Change to fixed positioning */
+  left: calc(100% + 0.5rem); /* Position relative to sidebar */
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+  z-index: 999;
+}
+
+/* Show dropdown on hover */
+.admin-sidebar .group:hover .dropdown-menu,
+.admin-sidebar .group:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* Custom scrollbar for the table */
+/* .overflow-x-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #E5E7EB transparent;
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+  height: 6px;
+} */
+
+/* .overflow-x-auto::-webkit-scrollbar-track {
+  background: transparent;
+} */
+
+/* .overflow-x-auto::-webkit-scrollbar-thumb {
+  background-color: #E5E7EB;
+  border-radius: 3px;
+} */
+
+/* .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background-color: #D1D5DB;
+} */
+
+/* Action buttons hover effect */
+.action-button {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.action-button:hover {
+  transform: translateY(-1px);
+}
+
+/* Confirmation dialog styling */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.dialog-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  max-width: 28rem;
+  width: 90%;
+}
+
+/* Fix for dropdown visibility in admin panel */
+.filter-section select {
+  position: relative;
+  z-index: 9999 !important; /* Highest z-index to ensure visibility */
+}
+
+.filter-section select:focus {
+  z-index: 9999 !important;
+}
+
+/* Ensure dropdown options are visible */
+select option {
+  position: relative;
+  z-index: 9999 !important;
+  background-color: white;
+  color: #333;
+  padding: 8px;
+}

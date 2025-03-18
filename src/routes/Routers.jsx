@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home'
 import FeaturedPro from '../components/FeatureProject/FeaturePro';
 import KnowMore from '../components/FeatureProject/KnowMore';
@@ -13,8 +13,11 @@ import RentDescription from '../components/Rent/RentDescription';
 import HomeLandDescription from '../components/Lands/HomeLandDescription';
 import HomePlotDescription from '../components/Plots/HomePlotDescription';
 import ForgotPassword from '../pages/ForgotPassword';
+import AdminRoutes from './AdminRoutes';
+
 const Routers = () => {
   return (
+
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/feature-project" element={<FeaturedPro />} />
@@ -29,7 +32,9 @@ const Routers = () => {
       <Route path="/home-lands" element={<HomeLandDescription />} />
       <Route path="/home-plots" element={<HomePlotDescription />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/admin/*" element={<AdminRoutes />} />
     </Routes>
+
   )
 }
 
