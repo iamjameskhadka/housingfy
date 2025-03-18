@@ -30,6 +30,7 @@ const AllProperties = () => {
       status: 'Sold'
     },
     {
+
       id: 3,
       title: 'PIK Villa House',
       address: '127, Boulevard Cockeysville',
@@ -42,7 +43,9 @@ const AllProperties = () => {
       status: 'Sold'
     },
     {
+
       id: 4,
+
       title: 'PIK Villa House',
       address: '127, Boulevard Cockeysville',
       image: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3',
@@ -162,6 +165,7 @@ const AllProperties = () => {
           </div>
 
           {/* Location Filter */}
+
           <div className="space-y-2 relative">
             <label className="block text-sm font-medium text-gray-700">Properties Location</label>
             <div className="relative">
@@ -174,143 +178,157 @@ const AllProperties = () => {
                 <option value="Birtamod">Birtamod</option>
               </select>
             </div>
-          </div>
 
-          {/* Type Filter */}
-          <div className="space-y-3">
-            <label className="block text-sm font-medium text-gray-700">Properties Type</label>
-            {propertyTypes.map((type) => (
-              <label key={type} className="flex items-center space-x-2">
-                <input type="checkbox" className="rounded border-gray-300 text-red-500 focus:ring-red-500 animated-checkbox" />
-                <span className="text-sm text-gray-600">{type}</span>
-              </label>
-            ))}
-          </div>
-
-          {/* Price Range */}
-          <div className="space-y-3">
-            <label className="block text-sm font-medium text-gray-700">Custom Price Range</label>
             <div className="space-y-2">
-              <input
-                type="range"
-                min="6000"
-                max="100000"
-                value={priceRange.max}
-                onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-red-500 price-slider"
-              />
-              <div className="flex items-center gap-2">
-                <input
-                  type="number"
-                  value={priceRange.min}
-                  onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
-                  className="w-24 p-1 text-sm border rounded focus:ring-2 focus:ring-red-500"
-                />
-                <span className="text-sm text-gray-500">to</span>
-                <input
-                  type="number"
-                  value={priceRange.max}
-                  onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
-                  className="w-24 p-1 text-sm border rounded focus:ring-2 focus:ring-red-500"
-                />
-              </div>
-            </div>
-          </div>
+              <label className="block text-sm font-medium text-gray-700">Properties Location</label>
+              <select className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-red-500 text-sm">
+                <option>Choose a city</option>
+                <option>Taplejung</option>
+                <option>Ithari</option>
+                <option>Damak</option>
+                <option>Morang</option>
+                <option>Birtamod</option>
 
-          {/* Accessibility Features */}
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Accessibility Features</label>
-            <div className="flex gap-4">
-              <label className="flex items-center space-x-2">
-                <input type="checkbox" className="rounded border-gray-300 text-red-500 focus:ring-red-500 animated-checkbox" />
-                <span className="text-sm text-gray-600">For Rent</span>
-              </label>
-              <label className="flex items-center space-x-2">
-                <input type="checkbox" className="rounded border-gray-300 text-red-500 focus:ring-red-500 animated-checkbox" />
-                <span className="text-sm text-gray-600">For Sale</span>
-              </label>
-            </div>
-          </div>
+              </select>
 
-          {/* Bedrooms Filter */}
-          <div className="space-y-3">
-            <label className="block text-sm font-medium text-gray-700">Bedrooms</label>
-            <div className="flex flex-wrap gap-2">
-              {bedroomOptions.map((option) => (
-                <FilterButton
-                  key={option}
-                  onClick={() => setSelectedBedrooms([...selectedBedrooms, option])}
-                  isActive={selectedBedrooms.includes(option)}
-                >
-                  {option}
-                </FilterButton>
+            </div>
+
+            {/* Type Filter */}
+            <div className="space-y-3">
+              <label className="block text-sm font-medium text-gray-700">Properties Type</label>
+              {propertyTypes.map((type) => (
+                <label key={type} className="flex items-center space-x-2">
+                  <input type="checkbox" className="rounded border-gray-300 text-red-500 focus:ring-red-500 animated-checkbox" />
+                  <span className="text-sm text-gray-600">{type}</span>
+                </label>
               ))}
             </div>
+
+            {/* Price Range */}
+            <div className="space-y-3">
+              <label className="block text-sm font-medium text-gray-700">Custom Price Range</label>
+              <div className="space-y-2">
+                <input
+                  type="range"
+                  min="6000"
+                  max="100000"
+                  value={priceRange.max}
+                  onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-red-500 price-slider"
+                />
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+                    value={priceRange.min}
+                    onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
+                    className="w-24 p-1 text-sm border rounded focus:ring-2 focus:ring-red-500"
+                  />
+                  <span className="text-sm text-gray-500">to</span>
+                  <input
+                    type="number"
+                    value={priceRange.max}
+                    onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
+                    className="w-24 p-1 text-sm border rounded focus:ring-2 focus:ring-red-500"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Accessibility Features */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Accessibility Features</label>
+              <div className="flex gap-4">
+                <label className="flex items-center space-x-2">
+                  <input type="checkbox" className="rounded border-gray-300 text-red-500 focus:ring-red-500 animated-checkbox" />
+                  <span className="text-sm text-gray-600">For Rent</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input type="checkbox" className="rounded border-gray-300 text-red-500 focus:ring-red-500 animated-checkbox" />
+                  <span className="text-sm text-gray-600">For Sale</span>
+                </label>
+              </div>
+            </div>
+
+            {/* Bedrooms Filter */}
+            <div className="space-y-3">
+              <label className="block text-sm font-medium text-gray-700">Bedrooms</label>
+              <div className="flex flex-wrap gap-2">
+                {bedroomOptions.map((option) => (
+                  <FilterButton
+                    key={option}
+                    onClick={() => setSelectedBedrooms([...selectedBedrooms, option])}
+                    isActive={selectedBedrooms.includes(option)}
+                  >
+                    {option}
+                  </FilterButton>
+                ))}
+              </div>
+            </div>
+
+            {/* Amenities Filter */}
+            <div className="space-y-3">
+              <label className="block text-sm font-medium text-gray-700">Accessibility Features</label>
+              {amenities.map((amenity) => (
+                <label key={amenity} className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={selectedAmenities.includes(amenity)}
+                    onChange={() => {
+                      if (selectedAmenities.includes(amenity)) {
+                        setSelectedAmenities(selectedAmenities.filter(a => a !== amenity));
+                      } else {
+                        setSelectedAmenities([...selectedAmenities, amenity]);
+                      }
+                    }}
+                    className="rounded border-gray-300 text-red-500 focus:ring-red-500 animated-checkbox"
+                  />
+                  <span className="text-sm text-gray-600">{amenity}</span>
+                </label>
+              ))}
+            </div>
+
+            {/* Apply Button */}
+            <button className="px-4 py-4 w-full  bg-red-500 text-white rounded-lg hover:bg-red-600 
+            transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5">
+              Apply
+            </button>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 smooth-scroll">
+          {/* Header Section */}
+          <div className="flex justify-between items-center mb-6 animate-fadeIn">
+            <div className="flex items-center gap-2">
+              <Sliders className="h-5 w-5 text-gray-400" />
+              <h1 className="text-xl font-bold text-gray-800"> Properties Listing </h1>
+            </div>
+            <button
+              onClick={handleAddProperty}
+              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 
+              transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
+            >
+              Add New Property
+            </button>
           </div>
 
-          {/* Amenities Filter */}
-          <div className="space-y-3">
-            <label className="block text-sm font-medium text-gray-700">Accessibility Features</label>
-            {amenities.map((amenity) => (
-              <label key={amenity} className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  checked={selectedAmenities.includes(amenity)}
-                  onChange={() => {
-                    if (selectedAmenities.includes(amenity)) {
-                      setSelectedAmenities(selectedAmenities.filter(a => a !== amenity));
-                    } else {
-                      setSelectedAmenities([...selectedAmenities, amenity]);
-                    }
-                  }}
-                  className="rounded border-gray-300 text-red-500 focus:ring-red-500 animated-checkbox"
-                />
-                <span className="text-sm text-gray-600">{amenity}</span>
-              </label>
+          {/* Properties Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {properties.map((property, index) => (
+              <div key={property.id}
+                className="property-card-hover"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <PropertyCard property={property} />
+              </div>
             ))}
           </div>
 
-          {/* Apply Button */}
-          <button className="px-4 py-4 w-full  bg-red-500 text-white rounded-lg hover:bg-red-600 
-            transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5">
-            Apply
-          </button>
+          {/* Property Post Form Modal */}
+          {showPropertyForm && (
+            <PropertyPostForm onClose={handleCloseForm} />
+          )}
         </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 smooth-scroll">
-        {/* Header Section */}
-        <div className="flex justify-between items-center mb-6 animate-fadeIn">
-          <div className="flex items-center gap-2">
-            <Sliders className="h-5 w-5 text-gray-400" />
-            <h1 className="text-xl font-bold text-gray-800"> Properties Listing </h1>
-          </div>
-          <button
-            onClick={handleAddProperty}
-            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 
-              transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
-          >
-            Add New Property
-          </button>
-        </div>
-
-        {/* Properties Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {properties.map((property, index) => (
-            <div key={property.id}
-              className="property-card-hover"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <PropertyCard property={property} />
-            </div>
-          ))}
-        </div>
-
-        {/* Property Post Form Modal */}
-        {showPropertyForm && (
-          <PropertyPostForm onClose={handleCloseForm} />
-        )}
       </div>
     </div>
   );
