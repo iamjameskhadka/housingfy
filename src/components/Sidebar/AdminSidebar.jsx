@@ -143,9 +143,9 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
       </div>
 
       {/* Main Sidebar Container */}
-      <div className={`admin-sidebar relative z-20 h-screen transition-all duration-300 
-        backdrop-blur-md bg-white/70 shadow-lg border-r border-gray-100/50
-        ${isOpen ? 'w-64' : 'w-16'} flex flex-col`}
+      <aside
+        className={`admin-sidebar bg-white shadow-lg h-screen transition-all duration-300 ease-in-out z-10 ${isOpen ? 'w-64' : 'w-20'
+          }`}
       >
         {/* Logo Section */}
         <div className="flex-shrink-0 sticky top-0 z-30 bg-gradient-to-b from-white/90 via-white/80 to-transparent backdrop-blur-md">
@@ -405,7 +405,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
             </div>
           </div>
         </div>
-      </div>
+      </aside>
     </div>
   );
 };

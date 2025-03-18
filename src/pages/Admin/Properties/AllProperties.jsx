@@ -151,9 +151,9 @@ const AllProperties = () => {
   };
 
   return (
-    <div className="p-6 flex flex-col md:flex-row gap-6">
+    <div className="p-6 flex gap-6">
       {/* Left Sidebar Filters */}
-      <div className="w-full md:w-72 flex-shrink-0 bg-white rounded-lg shadow-md p-4 h-fit filter-section">
+      <div className="w-72 flex-shrink-0 bg-white rounded-lg shadow-md p-4 h-fit filter-section">
         <div className="space-y-6">
           {/* Properties Header */}
           <div>
@@ -165,7 +165,7 @@ const AllProperties = () => {
           <div className="space-y-2 relative">
             <label className="block text-sm font-medium text-gray-700">Properties Location</label>
             <div className="relative">
-              <select className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-red-500 text-sm bg-white">
+              <select className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-red-500 text-sm bg-white" style={{ zIndex: 9999, position: 'relative' }}>
                 <option value="">Choose a city</option>
                 <option value="Taplejung">Taplejung</option>
                 <option value="Ithari">Ithari</option>
@@ -219,7 +219,7 @@ const AllProperties = () => {
 
           {/* Accessibility Features */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Property Status</label>
+            <label className="block text-sm font-medium text-gray-700">Accessibility Features</label>
             <div className="flex gap-4">
               <label className="flex items-center space-x-2">
                 <input type="checkbox" className="rounded border-gray-300 text-red-500 focus:ring-red-500 animated-checkbox" />
@@ -250,7 +250,7 @@ const AllProperties = () => {
 
           {/* Amenities Filter */}
           <div className="space-y-3">
-            <label className="block text-sm font-medium text-gray-700">Amenities</label>
+            <label className="block text-sm font-medium text-gray-700">Accessibility Features</label>
             {amenities.map((amenity) => (
               <label key={amenity} className="flex items-center space-x-2">
                 <input
@@ -271,8 +271,8 @@ const AllProperties = () => {
           </div>
 
           {/* Apply Button */}
-          <button className="px-4 py-4 w-full bg-red-500 text-white rounded-lg hover:bg-red-600 
-          transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5">
+          <button className="px-4 py-4 w-full  bg-red-500 text-white rounded-lg hover:bg-red-600 
+            transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5">
             Apply
           </button>
         </div>
@@ -289,7 +289,7 @@ const AllProperties = () => {
           <button
             onClick={handleAddProperty}
             className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 
-            transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
+              transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
           >
             Add New Property
           </button>

@@ -32,7 +32,7 @@ const AdminLayout = ({ children }) => {
 
           {/* Main Content */}
           <main className={`flex-1 overflow-x-hidden overflow-y-auto ${isAdminRoute ? 'p-4' : ''
-            }`}>
+            }`} style={{ isolation: 'isolate' }}>
             {children}
           </main>
 
