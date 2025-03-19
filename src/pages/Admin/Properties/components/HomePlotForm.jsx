@@ -24,11 +24,21 @@ import {
   Train,
   Building,
   GraduationCap,
-  ShoppingBag,
+  Plane,
   Stethoscope,
   Building2,
   Store,
-  CheckSquare
+  Leaf,
+  Cloud,
+  Waves,
+  Mountain,
+  Calendar,
+  CheckSquare,
+  Factory,
+  ShoppingBag,
+
+
+  Navigation
 } from 'lucide-react';
 
 import FileUpload from './FileUpload';
@@ -222,9 +232,31 @@ const HomePlotForm = ({ files, setFiles }) => {
               />
             </div>
           </div>
+
+          {/* Location URL */}
+          <div className="mt-4">
+            <div className="group">
+              <label className={labelStyles}>
+                <div className="flex items-center gap-2">
+                  <Navigation className="w-4 h-4" />
+                  Location URL
+                </div>
+              </label>
+              <input
+                type="url"
+                className={inputStyles}
+                placeholder="Enter Google Maps or location URL"
+              />
+              <p className="mt-1 text-xs text-gray-500">Add a Google Maps or any location service URL to help users find this property easily</p>
+            </div>
+          </div>
+
+          {/* City, State, PIN */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="group">
-              <label className={labelStyles}>City</label>
+              <label className={labelStyles}>
+                City
+              </label>
               <input
                 type="text"
                 className={inputStyles}
@@ -232,7 +264,9 @@ const HomePlotForm = ({ files, setFiles }) => {
               />
             </div>
             <div className="group">
-              <label className={labelStyles}>State</label>
+              <label className={labelStyles}>
+                State
+              </label>
               <input
                 type="text"
                 className={inputStyles}
@@ -240,12 +274,115 @@ const HomePlotForm = ({ files, setFiles }) => {
               />
             </div>
             <div className="group">
-              <label className={labelStyles}>PIN Code</label>
+              <label className={labelStyles}>
+                PIN Code
+              </label>
               <input
                 type="text"
                 className={inputStyles}
                 placeholder="Enter PIN code"
               />
+            </div>
+          </div>
+
+          {/* Nearby Locations */}
+          <div>
+            <h3 className="text-md font-medium mb-4">Nearby Locations</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Metro Stations */}
+              <div className="group">
+                <label className={labelStyles}>
+                  <div className="flex items-center gap-2">
+                    <Train className="w-4 h-4" />
+                    Metro Stations
+                  </div>
+                </label>
+                <textarea
+                  className={inputStyles}
+                  rows="2"
+                  placeholder="Enter nearby metro stations"
+                />
+              </div>
+
+              {/* Shopping Centers */}
+              <div className="group">
+                <label className={labelStyles}>
+                  <div className="flex items-center gap-2">
+                    <ShoppingBag className="w-4 h-4" />
+                    Shopping Centers
+                  </div>
+                </label>
+                <textarea
+                  className={inputStyles}
+                  rows="2"
+                  placeholder="Enter nearby shopping centers"
+                />
+              </div>
+
+              {/* Schools & Colleges */}
+              <div className="group">
+                <label className={labelStyles}>
+                  <div className="flex items-center gap-2">
+                    <GraduationCap className="w-4 h-4" />
+                    Schools & Colleges
+                  </div>
+                </label>
+                <textarea
+                  className={inputStyles}
+                  rows="2"
+                  placeholder="Enter nearby educational institutions"
+                />
+              </div>
+
+              {/* Hospitals */}
+              <div className="group">
+                <label className={labelStyles}>
+                  <div className="flex items-center gap-2">
+                    <Stethoscope className="w-4 h-4" />
+                    Hospitals
+                  </div>
+                </label>
+                <textarea
+                  className={inputStyles}
+                  rows="2"
+                  placeholder="Enter nearby hospitals"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Distance Matrix */}
+          <div>
+            <h3 className="text-md font-medium mb-4">Distance From Key Locations</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { label: 'Airport', icon: Plane },
+                { label: 'Railway Station', icon: Train },
+                { label: 'Bus Stand', icon: Bus },
+                { label: 'City Center', icon: Building },
+                { label: 'Industrial Area', icon: Factory },
+                { label: 'Highway', icon: Navigation }
+              ].map((item) => (
+                <div key={item.label} className="group">
+                  <label className={labelStyles}>
+                    <div className="flex items-center gap-2">
+                      <item.icon className="w-4 h-4" />
+                      {item.label}
+                    </div>
+                  </label>
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      className={inputStyles}
+                      placeholder="Distance"
+                    />
+                    <select className={`${inputStyles} w-24`}>
+                      <option value="km">km</option>
+                      <option value="mi">mi</option>
+                    </select>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

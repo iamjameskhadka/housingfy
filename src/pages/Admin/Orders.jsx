@@ -57,7 +57,7 @@ const Orders = () => {
     <div className="p-6 max-w-[1600px] mx-auto">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-    <div>
+        <div>
           <h1 className="text-2xl font-semibold text-gray-800">Orders</h1>
           <div className="flex items-center text-sm text-gray-500 mt-1">
             <Link to="/admin/dashboard" className="hover:text-red-500 transition-colors">
@@ -176,21 +176,27 @@ const Orders = () => {
                     </td>
                     <td className="py-4">
                       <div className="flex space-x-2">
-                        <button className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors
-                          group tooltip-trigger">
-                          <Eye className="w-4 h-4 text-gray-600 group-hover:text-gray-800" />
-                          <span className="tooltip">View Details</span>
-                        </button>
-                        <button className="p-1.5 rounded-lg hover:bg-blue-50 transition-colors
-                          group tooltip-trigger">
-                          <Pencil className="w-4 h-4 text-blue-600 group-hover:text-blue-700" />
-                          <span className="tooltip">Edit Order</span>
-                        </button>
-                        <button className="p-1.5 rounded-lg hover:bg-red-50 transition-colors
-                          group tooltip-trigger">
-                          <Trash2 className="w-4 h-4 text-red-600 group-hover:text-red-700" />
-                          <span className="tooltip">Delete Order</span>
-                        </button>
+                        <div className="tooltip-container">
+                          <button className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors
+                          group">
+                            <Eye className="w-4 h-4 text-gray-600 group-hover:text-gray-800" />
+                            <span className="tooltip">View Details</span>
+                          </button>
+                        </div>
+                        <div className="tooltip-container">
+                          <button className="p-1.5 rounded-lg hover:bg-blue-50 transition-colors
+                          group">
+                            <Pencil className="w-4 h-4 text-blue-600 group-hover:text-blue-700" />
+                            <span className="tooltip">Edit Transaction</span>
+                          </button>
+                        </div>
+                        <div className="tooltip-container">
+                          <button className="p-1.5 rounded-lg hover:bg-red-50 transition-colors
+                          group">
+                            <Trash2 className="w-4 h-4 text-red-600 group-hover:text-red-700" />
+                            <span className="tooltip">Delete Transaction</span>
+                          </button>
+                        </div>
                       </div>
                     </td>
                   </tr>

@@ -69,11 +69,15 @@ const PlotForm = ({ files, setFiles }) => {
               </label>
               <select className={inputStyles}>
                 <option value="">Select type</option>
-                <option value="office">Office Space</option>
-                <option value="retail">Retail Shop</option>
-                <option value="warehouse">Warehouse</option>
+                <option value="residential">Residential</option>
+                <option value="commercial">Commercial</option>
                 <option value="industrial">Industrial</option>
+                <option value="agricultural">Agricultural</option>
+                <option value="mixed-use">Mixed-Use</option>
+                <option value="recreational">Recreational</option>
+                <option value="institutional">Institutional</option>
               </select>
+
             </div>
             <div className="group">
               <label className={labelStyles}>
@@ -311,6 +315,24 @@ const PlotForm = ({ files, setFiles }) => {
                 rows="3"
                 placeholder="Enter nearby landmarks"
               />
+            </div>
+          </div>
+
+          {/* Location URL */}
+          <div className="mt-4">
+            <div className="group">
+              <label className={labelStyles}>
+                <div className="flex items-center gap-2">
+                  <Navigation className="w-4 h-4" />
+                  Location URL
+                </div>
+              </label>
+              <input
+                type="url"
+                className={inputStyles}
+                placeholder="Enter Google Maps or location URL"
+              />
+              <p className="mt-1 text-xs text-gray-500">Add a Google Maps or any location service URL to help users find this property easily</p>
             </div>
           </div>
 

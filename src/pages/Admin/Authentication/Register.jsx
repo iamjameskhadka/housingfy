@@ -137,10 +137,10 @@ const Register = () => {
         <div className="mt-6 text-center">
           <span className="text-gray-600">New here? </span>
           <Link
-            to="/admin/auth/signup"
+            to="/admin/auth/login"
             className="text-red-500 hover:text-red-600 font-medium transition-colors"
           >
-            Sign Up
+            Sign In
           </Link>
         </div>
       </div>

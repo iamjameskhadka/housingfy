@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 // import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/solid';
 import { ArrowUpIcon, ArrowDownIcon, HomeIcon, UsersIcon, DollarSignIcon, FileTextIcon } from 'lucide-react';
-import { ArrowDown, ArrowUp, Home, Briefcase, Users, CreditCard, CheckCircle, XCircle, Eye, Edit, Trash2 } from 'lucide-react';
+import { ArrowDown, ArrowUp, Home, Briefcase, Users, CreditCard, CheckCircle, XCircle, Eye, Edit, Trash2, Pencil } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 const data = [
@@ -273,16 +273,30 @@ const Analytics = () => {
                   {transaction.status === 'Completed' ? <CheckCircle className="inline-block mr-1" /> : <XCircle className="inline-block mr-1" />}
                   {transaction.status}
                 </td>
-                <td className="flex space-x-2">
-                  <button className="text-gray-500 hover:text-black p-1 rounded transition-colors">
-                    <Eye size={18} />
-                  </button>
-                  <button className="text-blue-500 hover:text-blue-700 p-1 rounded transition-colors">
-                    <Edit size={18} />
-                  </button>
-                  <button className="text-red-500 hover:text-red-700 p-1 rounded transition-colors">
-                    <Trash2 size={18} />
-                  </button>
+                <td className="py-4">
+                  <div className="flex space-x-2">
+                    <div className="tooltip-container">
+                      <button className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors
+                          group">
+                        <Eye className="w-4 h-4 text-gray-600 group-hover:text-gray-800" />
+                        <span className="tooltip">View Details</span>
+                      </button>
+                    </div>
+                    <div className="tooltip-container">
+                      <button className="p-1.5 rounded-lg hover:bg-blue-50 transition-colors
+                          group">
+                        <Pencil className="w-4 h-4 text-blue-600 group-hover:text-blue-700" />
+                        <span className="tooltip">Edit Transaction</span>
+                      </button>
+                    </div>
+                    <div className="tooltip-container">
+                      <button className="p-1.5 rounded-lg hover:bg-red-50 transition-colors
+                          group">
+                        <Trash2 className="w-4 h-4 text-red-600 group-hover:text-red-700" />
+                        <span className="tooltip">Delete Transaction</span>
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
             ))}

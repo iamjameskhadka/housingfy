@@ -7,16 +7,20 @@ import Routers from '../routes/Routers';
 const Layout = () => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
+  const isLockScreen = location.pathname === '/lock-screen';
+
+  // Don't show header and footer for admin routes or lock screen
+  const shouldShowHeaderFooter = !isAdminRoute && !isLockScreen;
 
   return (
     <div className="flex flex-col min-h-screen">
-      {!isAdminRoute && <Header />}
+      {shouldShowHeaderFooter && <Header />}
       <main className="flex-grow relative">
         <div className="custom-scrollbar h-full overflow-y-auto">
           <Routers />
         </div>
       </main>
-      {!isAdminRoute && <Footer />}
+      {shouldShowHeaderFooter && <Footer />}
     </div>
   );
 };

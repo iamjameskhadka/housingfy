@@ -29,7 +29,10 @@ import {
   ShoppingBag,
   Stethoscope,
   Building2,
-  FileText
+  FileText,
+  Plane,
+  Factory,
+  Navigation
 } from 'lucide-react';
 import FileUpload from './FileUpload';
 
@@ -345,7 +348,7 @@ const RentForm = ({ files, setFiles }) => {
       <div className={cardStyles}>
         <div className="flex items-center gap-2 mb-6">
           <Map className="w-5 h-5 text-red-500" />
-          <h2 className="text-lg font-medium">Location & Connectivity</h2>
+          <h2 className="text-lg font-medium">Location Details</h2>
         </div>
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -367,130 +370,349 @@ const RentForm = ({ files, setFiles }) => {
             </div>
           </div>
 
-          {/* Location Tabs */}
-          <div className="space-y-6">
-            <div className="flex gap-4 border-b">
-              <button
-                type="button"
-                onClick={() => setActiveTab('transit')}
-                className={`pb-2 px-1 relative ${activeTab === 'transit' ? 'text-red-500' : 'text-gray-500 hover:text-red-500'
-                  } transition-colors duration-300`}
-              >
-                Transit Points
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab('essentials')}
-                className={`pb-2 px-1 relative ${activeTab === 'essentials' ? 'text-red-500' : 'text-gray-500 hover:text-red-500'
-                  } transition-colors duration-300`}
-              >
-                Essential Locations
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab('utility')}
-                className={`pb-2 px-1 relative ${activeTab === 'utility' ? 'text-red-500' : 'text-gray-500 hover:text-red-500'
-                  } transition-colors duration-300`}
-              >
-                Utility Points
-              </button>
+          {/* Location URL */}
+          <div className="mt-4">
+            <div className="group">
+              <label className={labelStyles}>
+                <div className="flex items-center gap-2">
+                  <Navigation className="w-4 h-4" />
+                  Location URL
+                </div>
+              </label>
+              <input
+                type="url"
+                className={inputStyles}
+                placeholder="Enter Google Maps or location URL"
+              />
+              <p className="mt-1 text-xs text-gray-500">Add a Google Maps or any location service URL to help users find this property easily</p>
             </div>
-
-            {activeTab === 'transit' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  { label: 'Railway Station', icon: Train },
-                  { label: 'Metro Station', icon: Train },
-                  { label: 'Bus Stand', icon: Bus }
-                ].map((point) => (
-                  <div key={point.label} className="group">
-                    <label className={labelStyles}>
-                      <div className="flex items-center gap-2">
-                        <point.icon className="w-4 h-4" />
-                        {point.label}
-                      </div>
-                    </label>
-                    <div className="flex gap-2">
-                      <input
-                        type="text"
-                        className={inputStyles}
-                        placeholder={`Nearest ${point.label}`}
-                      />
-                      <input
-                        type="number"
-                        className={inputStyles}
-                        placeholder="Distance (km)"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {activeTab === 'essentials' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  { label: 'Schools & Colleges', icon: GraduationCap },
-                  { label: 'Shopping Centers', icon: ShoppingBag },
-                  { label: 'Hospitals', icon: Stethoscope },
-                  { label: 'Office Hubs', icon: Building2 }
-                ].map((point) => (
-                  <div key={point.label} className="group">
-                    <label className={labelStyles}>
-                      <div className="flex items-center gap-2">
-                        <point.icon className="w-4 h-4" />
-                        {point.label}
-                      </div>
-                    </label>
-                    <div className="flex gap-2">
-                      <input
-                        type="text"
-                        className={inputStyles}
-                        placeholder={`Nearest ${point.label}`}
-                      />
-                      <input
-                        type="number"
-                        className={inputStyles}
-                        placeholder="Distance (km)"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {activeTab === 'utility' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  { label: 'ATM', icon: DollarSign },
-                  { label: 'Bank', icon: Building },
-                  { label: 'Pharmacy', icon: Stethoscope },
-                  { label: 'Grocery Store', icon: ShoppingBag }
-                ].map((point) => (
-                  <div key={point.label} className="group">
-                    <label className={labelStyles}>
-                      <div className="flex items-center gap-2">
-                        <point.icon className="w-4 h-4" />
-                        {point.label}
-                      </div>
-                    </label>
-                    <div className="flex gap-2">
-                      <input
-                        type="text"
-                        className={inputStyles}
-                        placeholder={`Nearest ${point.label}`}
-                      />
-                      <input
-                        type="number"
-                        className={inputStyles}
-                        placeholder="Distance (km)"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
+
+          {/* City, State, PIN */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="group">
+              <label className={labelStyles}>
+                City
+              </label>
+              <input
+                type="text"
+                className={inputStyles}
+                placeholder="Enter city"
+              />
+            </div>
+            <div className="group">
+              <label className={labelStyles}>
+                State
+              </label>
+              <input
+                type="text"
+                className={inputStyles}
+                placeholder="Enter state"
+              />
+            </div>
+            <div className="group">
+              <label className={labelStyles}>
+                PIN Code
+              </label>
+              <input
+                type="text"
+                className={inputStyles}
+                placeholder="Enter PIN code"
+              />
+            </div>
+          </div>
+
+          {/* Nearby Locations */}
+          <div>
+            <h3 className="text-md font-medium mb-4">Nearby Locations</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Metro Stations */}
+              <div className="group">
+                <label className={labelStyles}>
+                  <div className="flex items-center gap-2">
+                    <Train className="w-4 h-4" />
+                    Metro Stations
+                  </div>
+                </label>
+                <textarea
+                  className={inputStyles}
+                  rows="2"
+                  placeholder="Enter nearby metro stations"
+                />
+              </div>
+
+              {/* Shopping Centers */}
+              <div className="group">
+                <label className={labelStyles}>
+                  <div className="flex items-center gap-2">
+                    <ShoppingBag className="w-4 h-4" />
+                    Shopping Centers
+                  </div>
+                </label>
+                <textarea
+                  className={inputStyles}
+                  rows="2"
+                  placeholder="Enter nearby shopping centers"
+                />
+              </div>
+
+              {/* Schools & Colleges */}
+              <div className="group">
+                <label className={labelStyles}>
+                  <div className="flex items-center gap-2">
+                    <GraduationCap className="w-4 h-4" />
+                    Schools & Colleges
+                  </div>
+                </label>
+                <textarea
+                  className={inputStyles}
+                  rows="2"
+                  placeholder="Enter nearby educational institutions"
+                />
+              </div>
+
+              {/* Hospitals */}
+              <div className="group">
+                <label className={labelStyles}>
+                  <div className="flex items-center gap-2">
+                    <Stethoscope className="w-4 h-4" />
+                    Hospitals
+                  </div>
+                </label>
+                <textarea
+                  className={inputStyles}
+                  rows="2"
+                  placeholder="Enter nearby hospitals"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Distance Matrix */}
+          <div>
+            <h3 className="text-md font-medium mb-4">Distance From Key Locations</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { label: 'Airport', icon: Plane },
+                { label: 'Railway Station', icon: Train },
+                { label: 'Bus Stand', icon: Bus },
+                { label: 'City Center', icon: Building },
+                { label: 'Industrial Area', icon: Factory },
+                { label: 'Highway', icon: Navigation }
+              ].map((item) => (
+                <div key={item.label} className="group">
+                  <label className={labelStyles}>
+                    <div className="flex items-center gap-2">
+                      <item.icon className="w-4 h-4" />
+                      {item.label}
+                    </div>
+                  </label>
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      className={inputStyles}
+                      placeholder="Distance"
+                    />
+                    <select className={`${inputStyles} w-24`}>
+                      <option value="km">km</option>
+                      <option value="mi">mi</option>
+                    </select>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Nearby Locations */}
+      <div className={cardStyles}>
+        <div className="flex items-center gap-2 mb-6">
+          <Map className="w-5 h-5 text-red-500" />
+          <h2 className="text-lg font-medium">Nearby Locations</h2>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="flex border-b mb-6">
+          {['transit', 'essentials', 'utility'].map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              onClick={() => setActiveTab(tab)}
+              className={`px-6 py-2 transition-all duration-300 cursor-pointer relative hover:bg-red-50 
+                ${activeTab === tab
+                  ? 'text-red-500 border-b-2 border-red-500 font-medium'
+                  : 'text-gray-500 hover:text-red-500'
+                }`}
+            >
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab Content */}
+        <div className="space-y-6">
+          {activeTab === 'transit' && (
+            <>
+              <div className="space-y-4">
+                <label className={labelStyles}>Bus Stations</label>
+                {[1, 2].map((index) => (
+                  <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      className={inputStyles}
+                      placeholder={`Bus Station ${index}`}
+                    />
+                    <div className="flex gap-4">
+                      <input
+                        type="number"
+                        className={inputStyles}
+                        placeholder="Distance (km)"
+                      />
+                      <input
+                        type="number"
+                        className={inputStyles}
+                        placeholder="Time (mins)"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-4">
+                <label className={labelStyles}>Train Stations</label>
+                {[1].map((index) => (
+                  <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      className={inputStyles}
+                      placeholder={`Train Station ${index}`}
+                    />
+                    <div className="flex gap-4">
+                      <input
+                        type="number"
+                        className={inputStyles}
+                        placeholder="Distance (km)"
+                      />
+                      <input
+                        type="number"
+                        className={inputStyles}
+                        placeholder="Time (mins)"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {activeTab === 'essentials' && (
+            <>
+              <div className="space-y-4">
+                <label className={labelStyles}>Schools & Colleges</label>
+                {[1, 2].map((index) => (
+                  <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      className={inputStyles}
+                      placeholder={`Institution ${index}`}
+                    />
+                    <div className="flex gap-4">
+                      <input
+                        type="number"
+                        className={inputStyles}
+                        placeholder="Distance (km)"
+                      />
+                      <input
+                        type="number"
+                        className={inputStyles}
+                        placeholder="Time (mins)"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-4">
+                <label className={labelStyles}>Hospitals</label>
+                {[1, 2].map((index) => (
+                  <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      className={inputStyles}
+                      placeholder={`Hospital ${index}`}
+                    />
+                    <div className="flex gap-4">
+                      <input
+                        type="number"
+                        className={inputStyles}
+                        placeholder="Distance (km)"
+                      />
+                      <input
+                        type="number"
+                        className={inputStyles}
+                        placeholder="Time (mins)"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {activeTab === 'utility' && (
+            <>
+              <div className="space-y-4">
+                <label className={labelStyles}>Shopping Centers</label>
+                {[1, 2].map((index) => (
+                  <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      className={inputStyles}
+                      placeholder={`Shopping Center ${index}`}
+                    />
+                    <div className="flex gap-4">
+                      <input
+                        type="number"
+                        className={inputStyles}
+                        placeholder="Distance (km)"
+                      />
+                      <input
+                        type="number"
+                        className={inputStyles}
+                        placeholder="Time (mins)"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-4">
+                <label className={labelStyles}>Banks & ATMs</label>
+                {[1, 2].map((index) => (
+                  <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      className={inputStyles}
+                      placeholder={`Bank/ATM ${index}`}
+                    />
+                    <div className="flex gap-4">
+                      <input
+                        type="number"
+                        className={inputStyles}
+                        placeholder="Distance (km)"
+                      />
+                      <input
+                        type="number"
+                        className={inputStyles}
+                        placeholder="Time (mins)"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
 

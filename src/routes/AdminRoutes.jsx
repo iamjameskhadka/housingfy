@@ -30,9 +30,13 @@ import Reviews from '../pages/Admin/Reviews';
 import Login from '../pages/Admin/Authentication/Login';
 import Register from '../pages/Admin/Authentication/Register';
 import ForgotPassword from '../pages/Admin/Authentication/ForgotPassword';
+// import LockScreen from '../pages/Admin/Authentication/LockScreen';
 
 import Help from '../pages/Admin/Help';
 import Setting from '../pages/Admin/Setting';
+
+import Pricing from '../pages/Admin/Pricing';
+import Schedule from '../pages/Admin/Schedule';
 
 
 const AdminRoutes = () => {
@@ -75,12 +79,20 @@ const AdminRoutes = () => {
         <Route path="auth/login" element={<Login />} />
         <Route path="auth/register" element={<Register />} />
         <Route path="auth/forgot-password" element={<ForgotPassword />} />
+        {/* <Route path="auth/lock-screen" element={<LockScreen />} /> */}
 
         {/* help */}
         <Route path="help" element={<Help />} />
 
         {/* setting */}
         <Route path="settings" element={<Setting />} />
+
+        {/* PRICING */}
+        <Route path="pricing" element={<Pricing />} />
+
+        {/* schedule */}
+        <Route path="schedule" element={<Schedule />} />
+
 
 
         {/* Add more routes as needed */}

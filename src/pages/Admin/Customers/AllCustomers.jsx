@@ -133,104 +133,108 @@ const AllCustomers = () => {
       </div>
 
       {/* Customer Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {customers.map((customer) => (
-          <div key={customer.id} className="bg-white rounded-xl p-6 border border-gray-200
+      <Link to="/admin/customers/details">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {customers.map((customer) => (
+            <div key={customer.id} className="bg-white rounded-xl p-6 border border-gray-200
             hover:shadow-md transition-all">
-            <div className="flex justify-end mb-4">
-              <button className="text-gray-400 hover:text-gray-600">
-                <Edit2 size={18} />
-              </button>
-            </div>
+              <div className="flex justify-end mb-4">
+                <button className="text-gray-400 hover:text-gray-600">
+                  <Edit2 size={18} />
+                </button>
+              </div>
 
-            <div className="flex items-center gap-4 mb-4">
-              <img
-                src={`https://randomuser.me/api/portraits/${customer.id % 2 ? 'men' : 'women'}/${customer.id}.jpg`}
-                alt={customer.name}
-                className="w-16 h-16 rounded-full object-cover"
-              />
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="font-medium">{customer.name}</h3>
-                  <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">
-                    {customer.status}
-                  </span>
+              <div className="flex items-center gap-4 mb-4">
+                <img
+                  src={`https://randomuser.me/api/portraits/${customer.id % 2 ? 'men' : 'women'}/${customer.id}.jpg`}
+                  alt={customer.name}
+                  className="w-16 h-16 rounded-full object-cover"
+                />
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-medium">{customer.name}</h3>
+                    <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">
+                      {customer.status}
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-500">{customer.email}</p>
                 </div>
-                <p className="text-sm text-gray-500">{customer.email}</p>
               </div>
-            </div>
 
-            <div className="space-y-3 mb-4">
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <Phone size={16} className="text-gray-400" />
-                <span>{customer.phone}</span>
+              <div className="space-y-3 mb-4">
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <Phone size={16} className="text-gray-400" />
+                  <span>{customer.phone}</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <MapPin size={16} className="text-gray-400" />
+                  <span>{customer.address}</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <MapPin size={16} className="text-gray-400" />
-                <span>{customer.address}</span>
-              </div>
-            </div>
 
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <div>
-                <div className="text-sm text-gray-500">View Property</div>
-                <div className="font-semibold">{customer.stats.viewProperty}</div>
+              <div className="grid grid-cols-3 gap-4 mb-6">
+                <div>
+                  <div className="text-sm text-gray-500">View Property</div>
+                  <div className="font-semibold">{customer.stats.viewProperty}</div>
+                </div>
+                <div>
+                  <div className="text-sm text-gray-500">Own Property</div>
+                  <div className="font-semibold">{customer.stats.ownProperty}</div>
+                </div>
+                <div>
+                  <div className="text-sm text-gray-500">Invest On Property</div>
+                  <div className="font-semibold">{customer.stats.investOnProperty}</div>
+                </div>
               </div>
-              <div>
-                <div className="text-sm text-gray-500">Own Property</div>
-                <div className="font-semibold">{customer.stats.ownProperty}</div>
-              </div>
-              <div>
-                <div className="text-sm text-gray-500">Invest On Property</div>
-                <div className="font-semibold">{customer.stats.investOnProperty}</div>
-              </div>
-            </div>
 
-            <div className="border-t pt-4">
-              <div className="text-sm text-gray-500 mb-3">Social Information:</div>
-              <div className="flex gap-2">
-                {Object.entries(customer.social).map(([platform, link]) => {
-                  const Icon = {
-                    facebook: Facebook,
-                    instagram: Instagram,
-                    twitter: Twitter,
-                    whatsapp: FaWhatsapp,
-                    email: Mail
-                  }[platform];
+              <div className="border-t pt-4">
+                <div className="text-sm text-gray-500 mb-3">Social Information:</div>
+                <div className="flex gap-2">
+                  {Object.entries(customer.social).map(([platform, link]) => {
+                    const Icon = {
+                      facebook: Facebook,
+                      instagram: Instagram,
+                      twitter: Twitter,
+                      whatsapp: FaWhatsapp,
+                      email: Mail
+                    }[platform];
 
-                  return Icon ? (
-                    <a
-                      key={platform}
-                      href={link}
-                      className="w-8 h-8 flex items-center justify-center rounded-full
+                    return Icon ? (
+                      <a
+                        key={platform}
+                        href={link}
+                        className="w-8 h-8 flex items-center justify-center rounded-full
                         bg-gray-100 hover:bg-gray-200 transition-all"
-                    >
-                      <Icon size={16} className={
-                        platform === 'whatsapp' ? 'text-green-500' :
-                          platform === 'facebook' ? 'text-blue-600' :
-                            platform === 'instagram' ? 'text-pink-600' :
-                              platform === 'twitter' ? 'text-blue-400' :
-                                'text-gray-600'
-                      } />
-                    </a>
-                  ) : null;
-                })}
+                      >
+                        <Icon size={16} className={
+                          platform === 'whatsapp' ? 'text-green-500' :
+                            platform === 'facebook' ? 'text-blue-600' :
+                              platform === 'instagram' ? 'text-pink-600' :
+                                platform === 'twitter' ? 'text-blue-400' :
+                                  'text-gray-600'
+                        } />
+                      </a>
+                    ) : null;
+                  })}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 mt-4">
+                <button className="flex items-center justify-center gap-2 px-4 py-2
+                bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                  Open Chat
+                </button>
+                <button className="flex items-center justify-center gap-2 px-4 py-2
+                border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                  Call To Customer
+                </button>
               </div>
             </div>
+          ))}
 
-            <div className="grid grid-cols-2 gap-3 mt-4">
-              <button className="flex items-center justify-center gap-2 px-4 py-2
-                bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
-                Open Chat
-              </button>
-              <button className="flex items-center justify-center gap-2 px-4 py-2
-                border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                Call To Customer
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+        </div>
+      </Link>
+
 
       {/* Pagination */}
       <div className="flex justify-between items-center mt-6">

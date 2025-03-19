@@ -12,6 +12,12 @@ const AdminLayout = ({ children }) => {
   // Check if the current path starts with '/admin'
   const isAdminRoute = location.pathname.startsWith('/admin');
 
+  // Check if the current path is an authentication route
+  const isAuthRoute =
+    location.pathname.includes('/admin/auth/login') ||
+    location.pathname.includes('/admin/auth/register') ||
+    location.pathname.includes('/admin/auth/forgot-password');
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -21,25 +27,24 @@ const AdminLayout = ({ children }) => {
       {/* Show main Header only if not an admin route */}
       {!isAdminRoute && <Header />}
 
+      {/* Admin Sidebar - only shown on admin routes that are not auth routes */}
+      {isAdminRoute && !isAuthRoute && <AdminSidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />}
 
-      <div className="flex h-full">
-        {/* Admin Sidebar - only shown on admin routes */}
-        {isAdminRoute && <AdminSidebar isOpen={isSidebarOpen} />}
+      {/* Admin Header - only shown on admin routes that are not auth routes */}
+      {isAdminRoute && !isAuthRoute && <AdminHeader toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />}
 
-        <div className="flex-1 flex flex-col">
-          {/* Admin Header - only shown on admin routes */}
-          {isAdminRoute && <AdminHeader toggleSidebar={toggleSidebar} />}
+      {/* Main Content */}
+      <main
+        className={`transition-all duration-300 ${isAdminRoute && !isAuthRoute
+          ? `pt-20 px-4 ${isSidebarOpen ? 'lg:ml-64' : 'lg:ml-20'}`
+          : ''
+          }`}
+      >
+        {children}
+      </main>
 
-          {/* Main Content */}
-          <main className={`flex-1 overflow-x-hidden overflow-y-auto ${isAdminRoute ? 'p-4' : ''
-            }`} style={{ isolation: 'isolate' }}>
-            {children}
-          </main>
-
-          {/* Show main Footer only if not an admin route */}
-          {!isAdminRoute && <Footer />}
-        </div>
-      </div>
+      {/* Show main Footer only if not an admin route */}
+      {!isAdminRoute && <Footer />}
     </div>
   );
 };

@@ -14,6 +14,7 @@ import HomeLandDescription from '../components/Lands/HomeLandDescription';
 import HomePlotDescription from '../components/Plots/HomePlotDescription';
 import ForgotPassword from '../pages/ForgotPassword';
 import AdminRoutes from './AdminRoutes';
+import LockScreen from '../pages/Auth/LockScreen';
 
 const Routers = () => {
   return (
@@ -32,6 +33,7 @@ const Routers = () => {
       <Route path="/home-lands" element={<HomeLandDescription />} />
       <Route path="/home-plots" element={<HomePlotDescription />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/lock-screen" element={<LockScreen />} />
       <Route path="/admin/*" element={<AdminRoutes />} />
     </Routes>
 

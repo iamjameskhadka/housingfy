@@ -296,16 +296,18 @@ const AllProperties = () => {
         </div>
 
         {/* Properties Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {properties.map((property, index) => (
-            <div key={property.id}
-              className="property-card-hover"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <PropertyCard property={property} />
-            </div>
-          ))}
-        </div>
+        <Link to="/admin/properties/details">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {properties.map((property, index) => (
+              <div key={property.id}
+                className="property-card-hover"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <PropertyCard property={property} />
+              </div>
+            ))}
+          </div>
+        </Link>
 
         {/* Property Post Form Modal */}
         {showPropertyForm && (

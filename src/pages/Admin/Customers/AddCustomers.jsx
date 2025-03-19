@@ -8,9 +8,13 @@ import {
   Mail,
   Home,
   Phone,
-  MapPin
+  MapPin,
+  X,
+  ChevronDown,
+  UserPlus
 } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
+import FileUpload from '../Properties/components/FileUpload';
 
 const AddCustomers = () => {
   const [formData, setFormData] = useState({
@@ -28,6 +32,7 @@ const AddCustomers = () => {
     emailUrl: ''
   });
 
+  const [showForm, setShowForm] = useState(false);
   const [dragActive, setDragActive] = useState(false);
 
   const handleDrag = (e) => {
@@ -45,7 +50,7 @@ const AddCustomers = () => {
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleFiles(e.dataTransfer.files);
+      handlePhotoChange(e.dataTransfer.files);
     }
   };
 
@@ -57,11 +62,15 @@ const AddCustomers = () => {
     }));
   };
 
-  const handleFiles = (files) => {
+  const handlePhotoChange = (files) => {
     setFormData(prev => ({
       ...prev,
       photo: files[0]
     }));
+  };
+
+  const toggleForm = () => {
+    setShowForm(true);
   };
 
   return (
@@ -81,7 +90,7 @@ const AddCustomers = () => {
       <div className="grid grid-cols-12 gap-6">
         {/* Preview Card */}
         <div className="col-span-12 md:col-span-4">
-          <div className="bg-white rounded-xl p-6 border border-gray-200">
+          <div className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all">
             <div className="flex flex-col">
               {/* Profile Image */}
               <img
@@ -159,235 +168,236 @@ const AddCustomers = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Add Customer Button */}
+              <div className="mt-6">
+                {!showForm && (
+                  <button
+                    onClick={toggleForm}
+                    className="w-full px-4 py-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                  >
+                    <UserPlus size={16} />
+                    Add Customer
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
         {/* Form */}
-        <div className="col-span-12 md:col-span-8">
-          <div className="bg-white rounded-xl p-6 border border-gray-200">
-            {/* Photo Upload */}
-            <div className="mb-8">
-              <h2 className="text-lg font-medium mb-4">Add Customer Photo</h2>
-              <div
-                className={`border-2 border-dashed rounded-xl p-8 text-center
-                  ${dragActive ? 'border-red-500 bg-red-50' : 'border-gray-300'}
-                  ${formData.photo ? 'bg-gray-50' : ''}`}
-                onDragEnter={handleDrag}
-                onDragLeave={handleDrag}
-                onDragOver={handleDrag}
-                onDrop={handleDrop}
+        {showForm && (
+          <div className="col-span-12 md:col-span-8">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 relative">
+              {/* Close Button */}
+              <button
+                onClick={() => setShowForm(false)}
+                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+                aria-label="Close form"
               >
-                <input
-                  type="file"
-                  id="fileInput"
-                  className="hidden"
-                  onChange={(e) => handleFiles(e.target.files)}
+                <X size={20} className="text-gray-500 hover:text-red-500" />
+              </button>
+
+              {/* Photo Upload */}
+              <div className="mb-8">
+                <FileUpload
+                  label="Add Customer Photo"
                   accept="image/*"
+                  multiple={false}
+                  files={formData.photo ? [formData.photo] : []}
+                  onChange={handlePhotoChange}
+                  preview={true}
                 />
-                <Upload className="w-8 h-8 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 mb-2">
-                  Drop your images here, or{' '}
-                  <label
-                    htmlFor="fileInput"
-                    className="text-red-500 hover:text-red-600 cursor-pointer"
-                  >
-                    click to browse
-                  </label>
-                </p>
-                <p className="text-sm text-gray-500">
-                  1600 x 1200 (4:3 recommended). PNG, JPG & GIF files are allowed
-                </p>
               </div>
-            </div>
 
-            {/* Basic Information */}
-            <div className="mb-8">
-              <h2 className="text-lg font-medium mb-4">Basic Information</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    placeholder="Enter full name"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                      focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Enter email"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                      focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Contact Number
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Enter contact number"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                      focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    placeholder="Enter address"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                      focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  />
+              {/* Basic Information */}
+              <div className="mb-8">
+                <h2 className="text-lg font-medium mb-4">Basic Information</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      placeholder="Enter full name"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Enter email"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Contact Number
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Enter contact number"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Address
+                    </label>
+                    <input
+                      type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      placeholder="Enter address"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Property Information */}
-            <div className="mb-8">
-              <h2 className="text-lg font-medium mb-4">Property Information</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    View Property
-                  </label>
-                  <input
-                    type="number"
-                    name="viewProperty"
-                    value={formData.viewProperty}
-                    onChange={handleChange}
-                    placeholder="Enter number"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                      focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Own Property
-                  </label>
-                  <input
-                    type="number"
-                    name="ownProperty"
-                    value={formData.ownProperty}
-                    onChange={handleChange}
-                    placeholder="Enter number"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                      focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Invest Property
-                  </label>
-                  <input
-                    type="number"
-                    name="investProperty"
-                    value={formData.investProperty}
-                    onChange={handleChange}
-                    placeholder="Enter amount"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                      focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  />
+              {/* Property Information */}
+              <div className="mb-8">
+                <h2 className="text-lg font-medium mb-4">Property Information</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      View Property
+                    </label>
+                    <input
+                      type="number"
+                      name="viewProperty"
+                      value={formData.viewProperty}
+                      onChange={handleChange}
+                      placeholder="Enter number"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Own Property
+                    </label>
+                    <input
+                      type="number"
+                      name="ownProperty"
+                      value={formData.ownProperty}
+                      onChange={handleChange}
+                      placeholder="Enter number"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Invest Property
+                    </label>
+                    <input
+                      type="number"
+                      name="investProperty"
+                      value={formData.investProperty}
+                      onChange={handleChange}
+                      placeholder="Enter amount"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Social Links */}
-            <div>
-              <h2 className="text-lg font-medium mb-4">Social Information</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <input
-                    type="url"
-                    name="facebookUrl"
-                    value={formData.facebookUrl}
-                    onChange={handleChange}
-                    placeholder="Facebook URL"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                      focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="url"
-                    name="instagramUrl"
-                    value={formData.instagramUrl}
-                    onChange={handleChange}
-                    placeholder="Instagram URL"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                      focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="url"
-                    name="twitterUrl"
-                    value={formData.twitterUrl}
-                    onChange={handleChange}
-                    placeholder="Twitter URL"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                      focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="url"
-                    name="whatsappUrl"
-                    value={formData.whatsappUrl}
-                    onChange={handleChange}
-                    placeholder="WhatsApp URL"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                      focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="url"
-                    name="emailUrl"
-                    value={formData.emailUrl}
-                    onChange={handleChange}
-                    placeholder="Email URL"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                      focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  />
+              {/* Social Links */}
+              <div>
+                <h2 className="text-lg font-medium mb-4">Social Information</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div>
+                    <input
+                      type="url"
+                      name="facebookUrl"
+                      value={formData.facebookUrl}
+                      onChange={handleChange}
+                      placeholder="Facebook URL"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="url"
+                      name="instagramUrl"
+                      value={formData.instagramUrl}
+                      onChange={handleChange}
+                      placeholder="Instagram URL"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="url"
+                      name="twitterUrl"
+                      value={formData.twitterUrl}
+                      onChange={handleChange}
+                      placeholder="Twitter URL"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="url"
+                      name="whatsappUrl"
+                      value={formData.whatsappUrl}
+                      onChange={handleChange}
+                      placeholder="WhatsApp URL"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="url"
+                      name="emailUrl"
+                      value={formData.emailUrl}
+                      onChange={handleChange}
+                      placeholder="Email URL"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Submit Buttons */}
-            <div className="flex justify-end gap-4 mt-8 pt-6 border-t">
-              <button className="px-6 py-2.5 border border-gray-300 rounded-lg
-                hover:bg-gray-50 transition-colors text-sm font-medium">
-                Cancel
-              </button>
-              <button className="px-6 py-2.5 bg-red-500 text-white rounded-lg
-                hover:bg-red-600 transition-colors text-sm font-medium">
-                Add Agent
-              </button>
+              {/* Submit Buttons */}
+              <div className="flex justify-end gap-4 mt-8 pt-6 border-t">
+                <button className="px-6 py-2.5 border border-gray-300 rounded-lg
+                  hover:bg-gray-50 transition-colors text-sm font-medium">
+                  Cancel
+                </button>
+                <button className="px-6 py-2.5 bg-red-500 text-white rounded-lg
+                  hover:bg-red-600 transition-colors text-sm font-medium">
+                  Add Agent
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
