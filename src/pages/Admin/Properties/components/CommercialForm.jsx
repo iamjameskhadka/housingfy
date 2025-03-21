@@ -341,34 +341,35 @@ const CommercialForm = ({ files, setFiles }) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="group">
               <label className={labelStyles}>
+                District
+              </label>
+              <input
+                type="text"
+                className={inputStyles}
+                placeholder="Enter District Name"
+              />
+            </div>
+            <div className="group">
+              <label className={labelStyles}>
                 City
               </label>
               <input
                 type="text"
                 className={inputStyles}
-                placeholder="Enter city"
+                placeholder="Enter city Name"
               />
             </div>
             <div className="group">
               <label className={labelStyles}>
-                State
+                Province No.
               </label>
               <input
-                type="text"
+                type="number"
                 className={inputStyles}
-                placeholder="Enter state"
+                placeholder="Enter Province number"
               />
             </div>
-            <div className="group">
-              <label className={labelStyles}>
-                PIN Code
-              </label>
-              <input
-                type="text"
-                className={inputStyles}
-                placeholder="Enter PIN code"
-              />
-            </div>
+
           </div>
 
           {/* Nearby Locations */}

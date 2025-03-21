@@ -418,7 +418,7 @@ const Rent = () => {
 
       {/* Property Listings Section */}
       <section className="mb-16">
-        <Link to="/rent-description">
+        <Link to="/rent/description">
           <div className="grid grid-cols-1 gap-6">
             {(showAllProperties ? SAMPLE_PROPERTIES : SAMPLE_PROPERTIES.slice(0, 6)).map((property) => (
               <PropertyCard

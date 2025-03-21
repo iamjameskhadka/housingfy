@@ -8,14 +8,16 @@ const AddAgent = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    agentNumber: '',
+    phone: '',
     address: '',
-    zipCode: '',
-    city: '',
-    country: '',
+    propertiesManaged: '',
+    totalSales: '',
+    experience: '',
     facebookUrl: '',
     instagramUrl: '',
     twitterUrl: '',
+    whatsappUrl: '',
+    emailUrl: '',
     photo: null
   });
   const [showForm, setShowForm] = useState(false);
@@ -45,8 +47,8 @@ const AddAgent = () => {
       <div className="mb-6">
         <h1 className="text-2xl font-semibold text-gray-800">Add Agent</h1>
         <div className="flex items-center text-sm text-gray-500 mt-1">
-          <Link to="/admin/dashboard" className="hover:text-red-500 transition-colors">
-            Real Estate
+          <Link to="/admin/agents" className="hover:text-red-500 transition-colors">
+            Agents
           </Link>
           <span className="mx-2">›</span>
           <span>Add Agent</span>
@@ -57,61 +59,96 @@ const AddAgent = () => {
         {/* Preview Card */}
         <div className="col-span-12 md:col-span-4">
           <div className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all">
-            <div className="flex items-center gap-4 mb-4">
+            <div className="flex flex-col">
+              {/* Profile Image */}
               <img
                 src={formData.photo ? URL.createObjectURL(formData.photo) : "https://randomuser.me/api/portraits/men/1.jpg"}
                 alt="Preview"
-                className="w-16 h-16 rounded-full object-cover ring-2 ring-red-100"
+                className="w-20 h-20 rounded-full object-cover mb-4"
               />
-              <div>
-                <h3 className="font-medium">{formData.fullName || 'Michael A. Miner'}</h3>
-                <p className="text-sm text-gray-500">{formData.email || 'michaelminer@dayrep.com'}</p>
-              </div>
-            </div>
 
-            <div className="flex items-center gap-3 mb-4">
-              <Home className="text-red-500" />
-              <div>
-                <div className="font-medium">243 Properties</div>
-                <div className="text-sm text-gray-500">
-                  {formData.address || 'Lincoln Drive Harrisburg, PA 17101 U.S.A'}
+              {/* Name and Status */}
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-medium">
+                  {formData.fullName || 'Michael A. Miner'}
+                </h3>
+                <span className="px-3 py-1 bg-green-500 text-white text-sm rounded-full">
+                  Active
+                </span>
+              </div>
+
+              {/* Contact Info */}
+              <div className="space-y-2 mb-6">
+                <div className="flex flex-col">
+                  <span className="text-gray-500 text-sm">Email Address : </span>
+                  <span className="text-sm">{formData.email || 'michaelminer@example.com'}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-500 text-sm">Contact Number : </span>
+                  <span className="text-sm">{formData.phone || '+1 234 567 890'}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-500 text-sm">Address : </span>
+                  <span className="text-sm">{formData.address || 'Lincoln Drive Harrisburg, PA 17101'}</span>
                 </div>
               </div>
-            </div>
 
-            {/* Social Media Icons */}
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-sm text-gray-500">Social Media:</span>
-              <div className="flex gap-2">
-                {[
-                  { platform: 'facebook', icon: Facebook, url: formData.facebookUrl, color: 'text-blue-600' },
-                  { platform: 'instagram', icon: Instagram, url: formData.instagramUrl, color: 'text-pink-600' },
-                  { platform: 'twitter', icon: Twitter, url: formData.twitterUrl, color: 'text-blue-400' },
-                  { platform: 'whatsapp', icon: FaWhatsapp, url: '#', color: 'text-green-500' },
-                  { platform: 'email', icon: Mail, url: formData.email, color: 'text-gray-600' }
-                ].map(({ platform, icon: Icon, url, color }) => (
-                  <a
-                    key={platform}
-                    href={url || '#'}
-                    className="w-8 h-8 flex items-center justify-center rounded-full
-                      bg-gray-100 hover:bg-gray-200 transition-all"
-                  >
-                    <Icon size={16} className={color} />
-                  </a>
-                ))}
+              {/* Agent Stats */}
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <div className="text-gray-500 text-sm">Properties</div>
+                  <div className="font-medium">{formData.propertiesManaged || '243'}</div>
+                </div>
+                <div>
+                  <div className="text-gray-500 text-sm">Total Sales</div>
+                  <div className="font-medium">${formData.totalSales || '1.5M'}</div>
+                </div>
+                <div>
+                  <div className="text-gray-500 text-sm">Experience</div>
+                  <div className="font-medium">{formData.experience || '5'} yrs</div>
+                </div>
               </div>
-            </div>
 
-            <div className="flex gap-2">
-              {!showForm && (
-                <button
-                  onClick={toggleForm}
-                  className="w-full px-4 py-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium flex items-center justify-center gap-2 cursor-pointer "
-                >
-                  <UserPlus size={16} />
-                  Add Agent
-                </button>
-              )}
+              {/* Social Information */}
+              <div>
+                <div className="text-gray-500 text-sm mb-3">Social Information :</div>
+                <div className="flex gap-2">
+                  {[
+                    { platform: 'facebook', icon: Facebook, color: 'bg-blue-50' },
+                    { platform: 'instagram', icon: Instagram, color: 'bg-pink-50' },
+                    { platform: 'twitter', icon: Twitter, color: 'bg-blue-50' },
+                    { platform: 'whatsapp', icon: FaWhatsapp, color: 'bg-green-50' },
+                    { platform: 'email', icon: Mail, color: 'bg-orange-50' }
+                  ].map(({ platform, icon: Icon, color }) => (
+                    <a
+                      key={platform}
+                      href={formData[`${platform}Url`] || '#'}
+                      className={`w-8 h-8 flex items-center justify-center rounded-full ${color}`}
+                    >
+                      <Icon size={16} className={
+                        platform === 'facebook' ? 'text-blue-500' :
+                          platform === 'instagram' ? 'text-pink-500' :
+                            platform === 'twitter' ? 'text-blue-400' :
+                              platform === 'whatsapp' ? 'text-green-500' :
+                                'text-orange-500'
+                      } />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Add Agent Button */}
+              <div className="mt-6">
+                {!showForm && (
+                  <button
+                    onClick={toggleForm}
+                    className="w-full px-4 py-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                  >
+                    <UserPlus size={16} />
+                    Add Agent
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -141,60 +178,62 @@ const AddAgent = () => {
                 />
               </div>
 
-              {/* Agent Information */}
+              {/* Basic Information */}
               <div className="mb-8">
-                <h2 className="text-lg font-medium mb-4">Agent Information</h2>
+                <h2 className="text-lg font-medium mb-4">Basic Information</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Agent Name
+                      Full Name
                     </label>
                     <input
                       type="text"
                       name="fullName"
-                      placeholder="Full Name"
                       value={formData.fullName}
                       onChange={handleChange}
+                      placeholder="Enter full name"
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
                         focus:ring-2 focus:ring-red-500 focus:border-red-500"
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Agent Email
+                      Email Address
                     </label>
                     <input
                       type="email"
                       name="email"
-                      placeholder="Enter Email"
                       value={formData.email}
                       onChange={handleChange}
+                      placeholder="Enter email"
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
                         focus:ring-2 focus:ring-red-500 focus:border-red-500"
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Agent Number
+                      Phone Number
                     </label>
                     <input
-                      type="text"
-                      name="agentNumber"
-                      placeholder="Enter Number"
-                      value={formData.agentNumber}
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
                       onChange={handleChange}
+                      placeholder="Enter phone number"
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
                         focus:ring-2 focus:ring-red-500 focus:border-red-500"
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Properties Number
+                      Address
                     </label>
                     <input
                       type="text"
-                      name="propertiesNumber"
-                      placeholder="Enter Properties Number"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      placeholder="Enter address"
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
                         focus:ring-2 focus:ring-red-500 focus:border-red-500"
                     />
@@ -202,88 +241,66 @@ const AddAgent = () => {
                 </div>
               </div>
 
-              {/* Address */}
+              {/* Agent Statistics */}
               <div className="mb-8">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Agent Address
-                </label>
-                <textarea
-                  name="address"
-                  rows="3"
-                  placeholder="Enter address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                    focus:ring-2 focus:ring-red-500 focus:border-red-500 resize-none"
-                />
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                <h2 className="text-lg font-medium mb-4">Agent Statistics</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Properties Managed
+                    </label>
                     <input
-                      type="text"
-                      name="zipCode"
-                      placeholder="zip-code"
-                      value={formData.zipCode}
+                      type="number"
+                      name="propertiesManaged"
+                      value={formData.propertiesManaged}
                       onChange={handleChange}
+                      placeholder="Enter number"
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
                         focus:ring-2 focus:ring-red-500 focus:border-red-500"
                     />
                   </div>
                   <div>
-                    <div className="relative">
-                      <select
-                        name="city"
-                        value={formData.city}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                          focus:ring-2 focus:ring-red-500 focus:border-red-500 appearance-none"
-                      >
-                        <option value="">Choose a city</option>
-                        <option value="new-york">New York</option>
-                        <option value="london">London</option>
-                        <option value="paris">Paris</option>
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Total Sales ($)
+                    </label>
+                    <input
+                      type="text"
+                      name="totalSales"
+                      value={formData.totalSales}
+                      onChange={handleChange}
+                      placeholder="Enter amount"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
                   </div>
                   <div>
-                    <div className="relative">
-                      <select
-                        name="country"
-                        value={formData.country}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
-                          focus:ring-2 focus:ring-red-500 focus:border-red-500 appearance-none"
-                      >
-                        <option value="">Choose a country</option>
-                        <option value="usa">United States</option>
-                        <option value="uk">United Kingdom</option>
-                        <option value="france">France</option>
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Experience (years)
+                    </label>
+                    <input
+                      type="number"
+                      name="experience"
+                      value={formData.experience}
+                      onChange={handleChange}
+                      placeholder="Enter years"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
                   </div>
                 </div>
               </div>
 
               {/* Social Links */}
               <div>
-                <h2 className="text-lg font-medium mb-4">Social Links</h2>
+                <h2 className="text-lg font-medium mb-4">Social Information</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
                     <input
                       type="url"
                       name="facebookUrl"
-                      placeholder="Enter URL"
                       value={formData.facebookUrl}
                       onChange={handleChange}
+                      placeholder="Facebook URL"
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
                         focus:ring-2 focus:ring-red-500 focus:border-red-500"
                     />
@@ -292,9 +309,9 @@ const AddAgent = () => {
                     <input
                       type="url"
                       name="instagramUrl"
-                      placeholder="Enter URL"
                       value={formData.instagramUrl}
                       onChange={handleChange}
+                      placeholder="Instagram URL"
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
                         focus:ring-2 focus:ring-red-500 focus:border-red-500"
                     />
@@ -303,9 +320,31 @@ const AddAgent = () => {
                     <input
                       type="url"
                       name="twitterUrl"
-                      placeholder="Enter URL"
                       value={formData.twitterUrl}
                       onChange={handleChange}
+                      placeholder="Twitter URL"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="url"
+                      name="whatsappUrl"
+                      value={formData.whatsappUrl}
+                      onChange={handleChange}
+                      placeholder="WhatsApp URL"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
+                        focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="url"
+                      name="emailUrl"
+                      value={formData.emailUrl}
+                      onChange={handleChange}
+                      placeholder="Email URL"
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none
                         focus:ring-2 focus:ring-red-500 focus:border-red-500"
                     />
@@ -316,16 +355,15 @@ const AddAgent = () => {
               {/* Submit Buttons */}
               <div className="flex justify-end gap-4 mt-8 pt-6 border-t">
                 <button
-                  type="button"
-                  className="px-6 py-2.5 border border-gray-300 rounded-lg
-                  hover:bg-gray-50 transition-colors text-sm font-medium"
                   onClick={() => setShowForm(false)}
+                  className="px-6 py-2.5 border border-gray-300 rounded-lg
+                    hover:bg-gray-50 transition-colors text-sm font-medium"
                 >
                   Cancel
                 </button>
                 <button className="px-6 py-2.5 bg-red-500 text-white rounded-lg
                   hover:bg-red-600 transition-colors text-sm font-medium">
-                  Create Agent
+                  Add Agent
                 </button>
               </div>
             </div>

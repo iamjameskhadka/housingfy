@@ -35,7 +35,7 @@ import { Link } from "react-router-dom"
 import TypeWriter from "../TypeWriter/TypeWriter"
 //import EnquiryForm from '../EnquiryForm/EnquiryForm';
 
-const HomeLandDescription = () => {
+const LandDescription = () => {
   // const [showEnquiryForm, setShowEnquiryForm] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('transit');
@@ -753,5 +753,5 @@ const HomeLandDescription = () => {
   );
 };
 
-export default HomeLandDescription;
+export default LandDescription;
 

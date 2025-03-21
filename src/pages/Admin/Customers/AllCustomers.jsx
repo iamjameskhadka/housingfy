@@ -152,8 +152,8 @@ const AllCustomers = () => {
                 />
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="font-medium">{customer.name}</h3>
-                    <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">
+                    <h3 className="font-medium  hover:text-red-500 transition-colors">{customer.name}</h3>
+                    <span className="px-2 py-1 text-white bg-green-500 text-xs rounded-full">
                       {customer.status}
                     </span>
                   </div>

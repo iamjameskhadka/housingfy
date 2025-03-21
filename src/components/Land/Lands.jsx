@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import EnquiryForm from '../EnquiryForm/EnquiryForm';
-import ScheduleVisitForm from '../ScheduleVisit/ScheduleVisitForm';
 import { Link } from 'react-router-dom';
+
+
+
 const cities = [
   { name: "All Properties", projects: "All" },
   { name: "Bangalore", projects: 18 },
@@ -21,7 +22,7 @@ const projects = [
     bedrooms: "3, 4 BHK",
     developmentSize: "28.5 Acres",
     totalUnits: "104 Units",
-    img: "https://api.basobaas.com/api/files/a4alnectuppemjo/cb3qbobephs478o/dsc_9282_1686219265_9FMsyihChM.jpg",
+    img: "https://www.redata.com/100042/mls/stillsmirc/20240045581ax.jpg",
     city: "Bangalore",
   },
   {
@@ -32,7 +33,7 @@ const projects = [
     bedrooms: "3, 4 BHK",
     developmentSize: "9 Acres",
     totalUnits: "316 Units",
-    img: "https://bhatnagars.co.in/wp-content/uploads/2018/06/onyx.jpeg",
+    img: "https://www.trulia.com/pictures/thumbs_4/zillowstatic/fp/7c9a5d863684dce45bf0dba0e41dc931-full.jpg",
     city: "Mumbai",
   },
   {
@@ -43,19 +44,19 @@ const projects = [
     bedrooms: "3, 4 BHK",
     developmentSize: "9 Acres",
     totalUnits: "316 Units",
-    img: "https://www.pbctoday.co.uk/news/wp-content/uploads/2022/05/0932_SKennedy_ARUP_EGH-055.jpeg",
+    img: "https://www.trulia.com/pictures/thumbs_4/zillowstatic/fp/1888a6282ff1f9acf7ce1a4997d5a61c-full.jpg",
     city: "Bangalore",
   },
 ];
 
-const Commercial = () => {
+const Lands = () => {
+
   const [selectedCity, setSelectedCity] = useState("All Properties");
   const [activeCard, setActiveCard] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [showEnquiryForm, setShowEnquiryForm] = useState(false);
-  const [showScheduleVisitForm, setShowScheduleVisitForm] = useState(false);
 
-  // Add window resize listener
+
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -86,8 +87,8 @@ const Commercial = () => {
 
       {/* Main Content */}
       <main className="w-full md:w-[85%] p-6">
-        <h2 className="text-3xl text-left text-red-500 mb-6">commercial Projects</h2>
-        <Link to="/commercial/description">
+        <h2 className="text-3xl text-left text-red-500 mb-6">Lands Projects</h2>
+        <Link to="/lands/description">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects
               .filter(({ city }) => selectedCity === "All Properties" || city === selectedCity)
@@ -154,32 +155,8 @@ const Commercial = () => {
           </div>
         </Link>
       </main>
-      <button
-        className="fixed right-0 top-1/2 transform -translate-y-1/2 bg-red-500 text-white py-2 px-4 rounded-l-lg shadow-lg rotate-90 hover:bg-red-600 transition-colors duration-300 z-50"
-        onClick={() => setShowEnquiryForm(true)}
-      >
-        <span className="text-sm sm:text-base font-medium">Enquire Now</span>
-      </button>
-
-      {/* Enquiry Form Modal */}
-      {showEnquiryForm && (
-        <div className="fixed inset-0 bg-black/50 z-[1000] flex xl:left-280 items-center justify-center p-4 overflow-y-auto">
-          <div className="relative bg-white rounded-lg w-full max-w-md mx-auto my-8 sm:my-0">
-            <EnquiryForm onClose={() => setShowEnquiryForm(false)} />
-          </div>
-        </div>
-      )}
-
-      {/* Schedule Visit Form Modal */}
-      {showScheduleVisitForm && (
-        <div className="fixed inset-0 bg-black/50 z-[1000] flex items-center justify-center p-4 overflow-y-auto">
-          <div className="relative bg-white rounded-lg w-full max-w-md mx-auto my-8 sm:my-0">
-            <ScheduleVisitForm onClose={() => setShowScheduleVisitForm(false)} />
-          </div>
-        </div>
-      )}
     </div>
   )
 }
 
-export default Commercial
+export default Lands

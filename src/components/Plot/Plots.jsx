@@ -21,7 +21,7 @@ const projects = [
     bedrooms: "3, 4 BHK",
     developmentSize: "28.5 Acres",
     totalUnits: "104 Units",
-    img: "https://api.basobaas.com/api/files/a4alnectuppemjo/cb3qbobephs478o/dsc_9282_1686219265_9FMsyihChM.jpg",
+    img: "https://www.hiranandaniparks.com/blog/wp-content/uploads/2023/10/01_Is-buying-residential-plots-a-good-investment-in-Oragadam-Chennai.jpg",
     city: "Bangalore",
   },
   {
@@ -32,7 +32,7 @@ const projects = [
     bedrooms: "3, 4 BHK",
     developmentSize: "9 Acres",
     totalUnits: "316 Units",
-    img: "https://bhatnagars.co.in/wp-content/uploads/2018/06/onyx.jpeg",
+    img: "https://is1-2.housingcdn.com/01c16c28/a64bfb19ad76eb3244efe62da0f03fbc/v0/fs/residential_plot-for-sale-poranki-Krishna-plot_view.jpg",
     city: "Mumbai",
   },
   {
@@ -43,7 +43,7 @@ const projects = [
     bedrooms: "3, 4 BHK",
     developmentSize: "9 Acres",
     totalUnits: "316 Units",
-    img: "https://www.pbctoday.co.uk/news/wp-content/uploads/2022/05/0932_SKennedy_ARUP_EGH-055.jpeg",
+    img: "https://www.wisdomproperties.com/web/assets/images/residential-plots/kalvoy.webp",
     city: "Bangalore",
   },
 ];
@@ -87,7 +87,7 @@ const Plots = () => {
       {/* Main Content */}
       <main className="w-full md:w-[85%] p-6">
         <h2 className="text-3xl text-left text-red-500 mb-6">Plot Projects</h2>
-        <Link to="/plot-description">
+        <Link to="/plots/description">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects
               .filter(({ city }) => selectedCity === "All Properties" || city === selectedCity)

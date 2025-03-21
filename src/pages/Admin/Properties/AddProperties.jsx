@@ -55,22 +55,13 @@ const AddProperties = () => {
       iconBg: 'bg-blue-500'
     },
     {
-      id: 'homeland',
-      title: 'Home Land',
+      id: 'land',
+      title: 'Land',
       icon: HomeIcon,
       description: 'Agricultural and non-agricultural lands',
       color: 'emerald',
       bgGradient: 'from-emerald-50 to-emerald-100',
       iconBg: 'bg-emerald-500'
-    },
-    {
-      id: 'homePlot',
-      title: 'Home Plot',
-      icon: Building2,
-      description: 'Ready-to-build residential plots',
-      color: 'amber',
-      bgGradient: 'from-amber-50 to-amber-100',
-      iconBg: 'bg-amber-500'
     },
     {
       id: 'rent',
@@ -98,9 +89,7 @@ const AddProperties = () => {
         return <CommercialForm files={files} setFiles={setFiles} />;
       case 'plot':
         return <PlotForm files={files} setFiles={setFiles} />;
-      case 'homePlot':
-        return <HomePlotForm files={files} setFiles={setFiles} />;
-      case 'homeland':
+      case 'land':
         return <HomeLandForm files={files} setFiles={setFiles} />;
       case 'rent':
         return <RentForm files={files} setFiles={setFiles} />;
@@ -161,24 +150,7 @@ const AddProperties = () => {
     { name: 'Featured Projects', value: 15, color: '#ec4899' }  // pink
   ];
 
-  // const monthlyListingsData = [
-  //   { month: 'Jan', listings: 65 },
-  //   { month: 'Feb', listings: 75 },
-  //   { month: 'Mar', listings: 85 },
-  //   { month: 'Apr', listings: 95 },
-  //   { month: 'May', listings: 80 },
-  //   { month: 'Jun', listings: 90 }
-  // ];
 
-  // const propertyValueData = [
-  //   { category: 'Commercial', value: 4500000 },
-  //   { category: 'Plot', value: 2800000 },
-  //   { category: 'Home Land', value: 3200000 },
-  //   { category: 'Home Plot', value: 2500000 },
-  //   { category: 'Rent', value: 1800000 }
-  // ];
-
-  // const COLORS = ['#ef4444', '#f97316', '#f59e0b', '#84cc16', '#06b6d4'];
 
   // Modify the property type click handler
   const handlePropertyTypeClick = (typeId) => {

@@ -40,10 +40,12 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { name: "Plot", path: "/plot-land" },
+    { name: "Plot", path: "/plots" },
+    { name: "Land", path: '/lands' },
     { name: "Commercial", path: "/commercial" },
     { name: "Rent", path: "/rent" },
     { name: "About", path: "/about-us" },
+
   ];
 
 

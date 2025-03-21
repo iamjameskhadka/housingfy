@@ -65,6 +65,7 @@ const AllAgent = () => {
       photo: 'https://randomuser.me/api/portraits/men/1.jpg',
       properties: 243,
       address: 'Lincoln Drive Harrisburg, PA 17101 U.S.A',
+      status: 'Available',
       social: {
         facebook: '#',
         instagram: '#',
@@ -80,6 +81,7 @@ const AllAgent = () => {
       photo: 'https://randomuser.me/api/portraits/women/2.jpg',
       properties: 451,
       address: 'Boulevard Cockeysville TX 75204',
+      status: 'Available',
       social: {
         facebook: '#',
         instagram: '#',
@@ -95,6 +97,7 @@ const AllAgent = () => {
       photo: 'https://randomuser.me/api/portraits/men/3.jpg',
       properties: 190,
       address: 'Woodside Circle Panama City, FL 32401',
+      status: 'Unavailable',
       social: {
         facebook: '#',
         instagram: '#',
@@ -110,6 +113,7 @@ const AllAgent = () => {
       photo: 'https://randomuser.me/api/portraits/women/4.jpg',
       properties: 320,
       address: 'Lakeview Avenue Seattle, WA 98101',
+      status: 'Available',
       social: {
         facebook: '#',
         instagram: '#',
@@ -125,6 +129,7 @@ const AllAgent = () => {
       photo: 'https://randomuser.me/api/portraits/men/5.jpg',
       properties: 280,
       address: 'Maple Street Denver, CO 80202',
+      status: 'Available',
       social: {
         facebook: '#',
         instagram: '#',
@@ -140,6 +145,7 @@ const AllAgent = () => {
       photo: 'https://randomuser.me/api/portraits/women/6.jpg',
       properties: 410,
       address: 'Sunset Boulevard Los Angeles, CA 90001',
+      status: 'Available',
       social: {
         facebook: '#',
         instagram: '#',
@@ -369,85 +375,105 @@ const AllAgent = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="bg-white rounded-xl p-6 h-[320px] hover:shadow-md 
-              transition-all duration-300 border border-transparent
-              hover:border-violet-100"
+              className="bg-white rounded-xl p-6 hover:shadow-lg 
+              transition-all duration-300 border border-gray-200
+              hover:border-red-100"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-4">
-                  <div className="relative">
+              <div className="flex flex-col">
+                {/* Profile Section */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-4">
                     <img
                       src={agent.photo}
                       alt={agent.name}
-                      className="w-16 h-16 rounded-full object-cover ring-2 ring-violet-100
-                      hover:ring-violet-200 transition-all"
+                      className="w-20 h-20 rounded-full object-cover ring-2 ring-red-100"
                     />
+                    <div>
+                      <h3 className="text-lg font-medium hover:text-red-500 transition-colors">
+                        {agent.name}
+                      </h3>
+                      <p className="text-sm text-gray-500">{agent.email}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-medium hover:text-violet-600 transition-colors">
-                      {agent.name}
-                    </h3>
-                    <p className="text-sm text-gray-500">{agent.email}</p>
+                  <span className="px-3 py-1  bg-green-500 text-white text-sm rounded-full">
+                    {agent.status}
+                  </span>
+                </div>
+
+                {/* Contact Info */}
+                <div className="space-y-2 mb-6">
+                  <div className="flex flex-col">
+                    <span className="text-gray-500 text-sm">Properties : </span>
+                    <div className="flex items-center gap-2">
+                      <Home className="text-red-500 w-4 h-4" />
+                      <span className="text-sm">{agent.properties} Properties</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-gray-500 text-sm">Address : </span>
+                    <span className="text-sm">{agent.address}</span>
                   </div>
                 </div>
-                <span className="text-violet-500">{agent.number}</span>
-              </div>
 
-              <div className="flex items-center gap-3 mb-4">
-                <Home className="text-violet-500" />
+                {/* Social Information */}
                 <div>
-                  <div className="font-medium">{agent.properties} Properties</div>
-                  <div className="text-sm text-gray-500">{agent.address}</div>
+                  <div className="text-gray-500 text-sm mb-3">Social Information :</div>
+                  <div className="flex gap-2">
+                    {Object.entries(agent.social).map(([platform, link]) => {
+                      const Icon = {
+                        facebook: Facebook,
+                        instagram: Instagram,
+                        twitter: Twitter,
+                        whatsapp: FaWhatsapp,
+                        email: Mail
+                      }[platform];
+
+                      const bgColor = {
+                        facebook: 'bg-blue-50',
+                        instagram: 'bg-pink-50',
+                        twitter: 'bg-blue-50',
+                        whatsapp: 'bg-green-50',
+                        email: 'bg-orange-50'
+                      }[platform];
+
+                      const textColor = {
+                        facebook: 'text-blue-500',
+                        instagram: 'text-pink-500',
+                        twitter: 'text-blue-400',
+                        whatsapp: 'text-green-500',
+                        email: 'text-orange-500'
+                      }[platform];
+
+                      return Icon ? (
+                        <a
+                          key={platform}
+                          href={link}
+                          className={`w-8 h-8 flex items-center justify-center rounded-full ${bgColor}`}
+                        >
+                          <Icon size={16} className={textColor} />
+                        </a>
+                      ) : null;
+                    })}
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-sm text-gray-500">Social Media:</span>
-                <div className="flex gap-2">
-                  {Object.entries(agent.social).map(([platform, link]) => {
-                    const Icon = {
-                      facebook: Facebook,
-                      instagram: Instagram,
-                      twitter: Twitter,
-                      whatsapp: FaWhatsapp,
-                      email: Mail
-                    }[platform];
-
-                    return Icon ? (
-                      <a
-                        key={platform}
-                        href={link}
-                        className="w-8 h-8 flex items-center justify-center rounded-full
-                        bg-gray-100 hover:bg-gray-200 transition-all"
-                      >
-                        <Icon size={16} className={
-                          platform === 'whatsapp' ? 'text-green-500' :
-                            platform === 'facebook' ? 'text-blue-600' :
-                              platform === 'instagram' ? 'text-pink-600' :
-                                platform === 'twitter' ? 'text-blue-400' :
-                                  'text-gray-600'
-                        } />
-                      </a>
-                    ) : null;
-                  })}
+                {/* Action Buttons */}
+                <div className="grid grid-cols-2 gap-3 mt-6">
+                  <button className="flex items-center justify-center gap-2 px-4 py-2.5
+                    bg-red-500 text-white rounded-lg hover:bg-red-600
+                    transition-colors text-sm font-medium"
+                  >
+                    <Phone size={16} />
+                    <span>Call Us</span>
+                  </button>
+                  <button className="flex items-center justify-center gap-2 px-4 py-2.5
+                    border border-gray-300 rounded-lg hover:bg-gray-50
+                    transition-all hover:border-red-300 text-sm font-medium"
+                  >
+                    <MessageCircle size={16} />
+                    <span>Message</span>
+                  </button>
                 </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <button className="flex items-center justify-center gap-2 px-4 py-2
-                bg-violet-500 text-white rounded-lg hover:bg-violet-600
-                transition-colors"
-                >
-                  <Phone size={16} />
-                  <span>Call Us</span>
-                </button>
-                <button className="flex items-center justify-center gap-2 px-4 py-2
-                border border-gray-300 rounded-lg hover:bg-gray-50
-                transition-all hover:border-violet-300"
-                >
-                  <MessageCircle size={16} />
-                  <span>Message</span>
-                </button>
               </div>
             </motion.div>
           ))}
