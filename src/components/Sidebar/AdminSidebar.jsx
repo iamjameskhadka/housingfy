@@ -5,7 +5,7 @@ import {
   ClipboardList, MessageSquare, Inbox, FileText, UserCheck,
   CreditCard, Star, Settings, ShoppingBag, BarChart2,
   PieChart, UserPlus, Key, LogOut, HelpCircle, Bell,
-  Briefcase, FileBarChart, Home, Mail, X
+  Briefcase, FileBarChart, Home, Mail, X, Menu
 } from "lucide-react";
 import navlogo from '../../assets/navlogo.png';
 
@@ -145,166 +145,74 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
     : 'bg-gradient-to-b from-white/90 via-white/80 to-transparent backdrop-blur-md';
 
   return (
-    <aside
-      className={`fixed inset-y-0 left-0 z-50 flex flex-col bg-white shadow-lg transition-all duration-300 ease-in-out rounded-lg
-        ${isOpen ? 'w-64' : 'w-20'} ${!isOpen ? 'overflow-visible' : 'overflow-hidden'}`}>
-      {/* Logo Section */}
-      <div className={`flex-shrink-0 ${headerBgClass}`}>
-        <div className={`p-2.5 border-b border-red-500 rounded-lg mt-7 ${!isOpen ? 'flex justify-center' : ''}`}>
-          <Link to="/admin/analytics"
-            className="flex items-center space-x-3 hover:scale-105 transition-transform duration-300"
-          >
-            <div className="flex items-center -mt-5">
-              {isOpen ? (
-                <img
-                  src={navlogo}
-                  alt="Logo"
-                  className="w-30 h-10 object-contain"
-                />
-              ) : (
-                <Home className="h-7 w-7 text-red-500" />
-              )}
-            </div>
-          </Link>
-        </div>
-      </div>
-
-      {/* Scrollable Content */}
-      <div
-        ref={sidebarRef}
-        className="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar"
+    <>
+      {/* Mobile Menu Toggle Button - Always visible on small/medium screens */}
+      <button
+        onClick={toggleSidebar}
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white shadow-md hover:bg-gray-50 transition-all duration-300"
       >
-        <div className="px-4 py-6 space-y-8">
-          {/* Menu Section */}
-          <div>
-            {isOpen && (
-              <h2 className="text-xs font-semibold bg-gradient-to-r from-gray-900 to-gray-600 
-                bg-clip-text text-transparent uppercase tracking-wider mb-4">
-                Menu
-              </h2>
-            )}
+        {isOpen ? (
+          <X className="h-6 w-6 text-gray-600" />
+        ) : (
+          <Menu className="h-6 w-6 text-gray-600" />
+        )}
+      </button>
 
-            <nav className="space-y-1">
-              {menuItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="relative group"
-                  onMouseEnter={() => !isOpen && setHoveredItem(index)}
-                  onMouseLeave={() => !isOpen && setHoveredItem(null)}
-                >
-                  {!item.submenu ? (
-                    <Link
-                      to={item.path}
-                      className={`flex items-center px-4 py-3 rounded-xl transition-all duration-300 
-                        backdrop-blur-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100/50
-                        ${isMenuActive(item)
-                          ? 'bg-gradient-to-r from-red-100 to-red-50 text-red-500 shadow-sm'
-                          : 'text-gray-600'} 
-                        ${!isOpen && 'justify-center'}`}
-                    >
-                      <span className={`transition-transform duration-300 ${isOpen ? 'mr-3' : 'mr-0'} 
-                        group-hover:scale-110`}>
-                        {item.icon}
-                      </span>
-                      {isOpen && <span>{item.title}</span>}
+      {/* Overlay for mobile when sidebar is open */}
+      {isOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+          onClick={toggleSidebar}
+        />
+      )}
 
-                      {/* Tooltip for non-dropdown items when collapsed */}
-                      {!isOpen && (
-                        <div className="absolute left-full top-0 ml-2 px-2 py-1 bg-gray-800 text-white text-sm 
-                          rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible 
-                          transition-all duration-300 whitespace-nowrap z-50">
-                          {item.title}
-                        </div>
-                      )}
-                    </Link>
-                  ) : (
-                    <>
-                      <div
-                        onClick={() => handleDropdownClick(item.title)}
-                        className={`flex items-center px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 
-                          backdrop-blur-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100/50
-                          ${isMenuActive(item)
-                            ? 'bg-gradient-to-r from-red-100 to-red-50 text-red-500 shadow-sm'
-                            : 'text-gray-600'}
-                          ${!isOpen && 'justify-center'}`}
-                      >
-                        <span className={`transition-transform duration-300 ${isOpen ? 'mr-3' : 'mr-0'} 
-                          group-hover:scale-110`}>
-                          {item.icon}
-                        </span>
-                        {isOpen && (
-                          <div className="flex items-center justify-between flex-1">
-                            <span>{item.title}</span>
-                            <ChevronDown className={`h-4 w-4 transition-transform duration-300 
-                              ${activeDropdown === item.title ? 'rotate-180' : ''}`}
-                            />
-                          </div>
-                        )}
-
-                        {/* Tooltip for dropdown items when collapsed */}
-                        {!isOpen && (
-                          <div className="absolute left-full top-0 ml-2 px-2 py-1 bg-gray-800 text-white text-sm 
-                            rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible 
-                            transition-all duration-300 whitespace-nowrap z-50">
-                            {item.title}
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Updated Submenu Positioning */}
-                      {((isOpen && activeDropdown === item.title) || (!isOpen && hoveredItem === index)) && (
-                        <div
-                          className={`${isOpen
-                            ? 'pl-12 py-2 space-y-1'
-                            : 'absolute left-full top-0 ml-2 bg-white/80 backdrop-blur-md shadow-lg rounded-xl py-2 min-w-[200px]'}`}
-                          style={!isOpen ? {
-                            zIndex: 50,
-                            marginTop: '-10px',
-                          } : {}}
-                        >
-                          {item.submenu.map((subItem, subIndex) => (
-                            <Link
-                              key={subIndex}
-                              to={subItem.path}
-                              className={`flex items-center px-4 py-2 text-sm text-gray-600 
-                                hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100/50 rounded-lg
-                                transition-all duration-300 hover:translate-x-1
-                                ${location.pathname === subItem.path
-                                  ? 'bg-gradient-to-r from-red-100 to-red-50 text-red-500'
-                                  : ''}`}
-                            >
-                              {subItem.icon && <span className="mr-2">{subItem.icon}</span>}
-                              <span className="whitespace-nowrap">{subItem.title}</span>
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  )}
-                </div>
-              ))}
-            </nav>
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 flex flex-col bg-white shadow-lg transition-all duration-300 ease-in-out rounded-lg
+          ${isOpen ? 'w-64 translate-x-0' : 'w-20 -translate-x-full lg:translate-x-0'} 
+          ${!isOpen ? 'overflow-visible' : 'overflow-hidden'}`}
+      >
+        {/* Logo Section */}
+        <div className={`flex-shrink-0 ${headerBgClass}`}>
+          <div className={`p-2.5 border-b border-red-500 rounded-lg mt-7 ${!isOpen ? 'flex justify-center' : ''}`}>
+            <Link to="/admin/analytics"
+              className="flex items-center space-x-3 hover:scale-105 transition-transform duration-300"
+            >
+              <div className="flex items-center -mt-5">
+                {isOpen ? (
+                  <img
+                    src={navlogo}
+                    alt="Logo"
+                    className="w-30 h-10 object-contain"
+                  />
+                ) : (
+                  <Home className="h-7 w-7 text-red-500" />
+                )}
+              </div>
+            </Link>
           </div>
+        </div>
 
-          {/* Custom Section */}
-          <div>
-            <div className="relative pt-6">
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r 
-                from-transparent via-gray-200/50 to-transparent" />
-
+        {/* Scrollable Content */}
+        <div
+          ref={sidebarRef}
+          className="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar"
+        >
+          <div className="px-4 py-6 space-y-8">
+            {/* Menu Section */}
+            <div>
               {isOpen && (
                 <h2 className="text-xs font-semibold bg-gradient-to-r from-gray-900 to-gray-600 
                   bg-clip-text text-transparent uppercase tracking-wider mb-4">
-                  Custom
+                  Menu
                 </h2>
               )}
 
               <nav className="space-y-1">
-                {customItems.map((item, index) => (
+                {menuItems.map((item, index) => (
                   <div
                     key={index}
                     className="relative group"
-                    onMouseEnter={() => !isOpen && setHoveredItem(`custom-${index}`)}
+                    onMouseEnter={() => !isOpen && setHoveredItem(index)}
                     onMouseLeave={() => !isOpen && setHoveredItem(null)}
                   >
                     {!item.submenu ? (
@@ -314,7 +222,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
                           backdrop-blur-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100/50
                           ${isMenuActive(item)
                             ? 'bg-gradient-to-r from-red-100 to-red-50 text-red-500 shadow-sm'
-                            : 'text-gray-600'}
+                            : 'text-gray-600'} 
                           ${!isOpen && 'justify-center'}`}
                       >
                         <span className={`transition-transform duration-300 ${isOpen ? 'mr-3' : 'mr-0'} 
@@ -335,7 +243,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
                     ) : (
                       <>
                         <div
-                          onClick={() => handleDropdownClick(`custom-${item.title}`)}
+                          onClick={() => handleDropdownClick(item.title)}
                           className={`flex items-center px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 
                             backdrop-blur-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100/50
                             ${isMenuActive(item)
@@ -351,7 +259,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
                             <div className="flex items-center justify-between flex-1">
                               <span>{item.title}</span>
                               <ChevronDown className={`h-4 w-4 transition-transform duration-300 
-                                ${activeDropdown === `custom-${item.title}` ? 'rotate-180' : ''}`}
+                                ${activeDropdown === item.title ? 'rotate-180' : ''}`}
                               />
                             </div>
                           )}
@@ -366,8 +274,8 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
                           )}
                         </div>
 
-                        {/* Updated Custom Submenu Positioning */}
-                        {((isOpen && activeDropdown === `custom-${item.title}`) || (!isOpen && hoveredItem === `custom-${index}`)) && (
+                        {/* Updated Submenu Positioning */}
+                        {((isOpen && activeDropdown === item.title) || (!isOpen && hoveredItem === index)) && (
                           <div
                             className={`${isOpen
                               ? 'pl-12 py-2 space-y-1'
@@ -377,7 +285,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
                               marginTop: '-10px',
                             } : {}}
                           >
-                            {item.submenu?.map((subItem, subIndex) => (
+                            {item.submenu.map((subItem, subIndex) => (
                               <Link
                                 key={subIndex}
                                 to={subItem.path}
@@ -400,10 +308,126 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
                 ))}
               </nav>
             </div>
+
+            {/* Custom Section */}
+            <div>
+              <div className="relative pt-6">
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r 
+                  from-transparent via-gray-200/50 to-transparent" />
+
+                {isOpen && (
+                  <h2 className="text-xs font-semibold bg-gradient-to-r from-gray-900 to-gray-600 
+                    bg-clip-text text-transparent uppercase tracking-wider mb-4">
+                    Custom
+                  </h2>
+                )}
+
+                <nav className="space-y-1">
+                  {customItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className="relative group"
+                      onMouseEnter={() => !isOpen && setHoveredItem(`custom-${index}`)}
+                      onMouseLeave={() => !isOpen && setHoveredItem(null)}
+                    >
+                      {!item.submenu ? (
+                        <Link
+                          to={item.path}
+                          className={`flex items-center px-4 py-3 rounded-xl transition-all duration-300 
+                            backdrop-blur-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100/50
+                            ${isMenuActive(item)
+                              ? 'bg-gradient-to-r from-red-100 to-red-50 text-red-500 shadow-sm'
+                              : 'text-gray-600'}
+                            ${!isOpen && 'justify-center'}`}
+                        >
+                          <span className={`transition-transform duration-300 ${isOpen ? 'mr-3' : 'mr-0'} 
+                            group-hover:scale-110`}>
+                            {item.icon}
+                          </span>
+                          {isOpen && <span>{item.title}</span>}
+
+                          {/* Tooltip for non-dropdown items when collapsed */}
+                          {!isOpen && (
+                            <div className="absolute left-full top-0 ml-2 px-2 py-1 bg-gray-800 text-white text-sm 
+                              rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible 
+                              transition-all duration-300 whitespace-nowrap z-50">
+                              {item.title}
+                            </div>
+                          )}
+                        </Link>
+                      ) : (
+                        <>
+                          <div
+                            onClick={() => handleDropdownClick(`custom-${item.title}`)}
+                            className={`flex items-center px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 
+                              backdrop-blur-sm hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100/50
+                              ${isMenuActive(item)
+                                ? 'bg-gradient-to-r from-red-100 to-red-50 text-red-500 shadow-sm'
+                                : 'text-gray-600'}
+                              ${!isOpen && 'justify-center'}`}
+                          >
+                            <span className={`transition-transform duration-300 ${isOpen ? 'mr-3' : 'mr-0'} 
+                              group-hover:scale-110`}>
+                              {item.icon}
+                            </span>
+                            {isOpen && (
+                              <div className="flex items-center justify-between flex-1">
+                                <span>{item.title}</span>
+                                <ChevronDown className={`h-4 w-4 transition-transform duration-300 
+                                  ${activeDropdown === `custom-${item.title}` ? 'rotate-180' : ''}`}
+                                />
+                              </div>
+                            )}
+
+                            {/* Tooltip for dropdown items when collapsed */}
+                            {!isOpen && (
+                              <div className="absolute left-full top-0 ml-2 px-2 py-1 bg-gray-800 text-white text-sm 
+                                rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible 
+                                transition-all duration-300 whitespace-nowrap z-50">
+                                {item.title}
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Updated Custom Submenu Positioning */}
+                          {((isOpen && activeDropdown === `custom-${item.title}`) || (!isOpen && hoveredItem === `custom-${index}`)) && (
+                            <div
+                              className={`${isOpen
+                                ? 'pl-12 py-2 space-y-1'
+                                : 'absolute left-full top-0 ml-2 bg-white/80 backdrop-blur-md shadow-lg rounded-xl py-2 min-w-[200px]'}`}
+                              style={!isOpen ? {
+                                zIndex: 50,
+                                marginTop: '-10px',
+                              } : {}}
+                            >
+                              {item.submenu?.map((subItem, subIndex) => (
+                                <Link
+                                  key={subIndex}
+                                  to={subItem.path}
+                                  className={`flex items-center px-4 py-2 text-sm text-gray-600 
+                                    hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100/50 rounded-lg
+                                    transition-all duration-300 hover:translate-x-1
+                                    ${location.pathname === subItem.path
+                                      ? 'bg-gradient-to-r from-red-100 to-red-50 text-red-500'
+                                      : ''}`}
+                                >
+                                  {subItem.icon && <span className="mr-2">{subItem.icon}</span>}
+                                  <span className="whitespace-nowrap">{subItem.title}</span>
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  ))}
+                </nav>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 };
 
