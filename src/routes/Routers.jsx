@@ -26,8 +26,11 @@ import RentDescription from '../components/Rent/RentDescription';
 import Lands from '../components/Land/Lands';
 import LandDescription from '../components/Land/LandDescription';
 
-// import HomeLandDescription from '../components/FeatureLand/HomeLandDescription';
-// import HomePlotDescription from '../components/FeaturePlot/HomePlotDescription';
+//display property
+import DisplayProperty from '../pages/PropertyListing/DisplayProperty';
+import PropertyDetails from '../pages/PropertyListing/PropertyDetails';
+
+
 import ForgotPassword from '../pages/ForgotPassword';
 import AdminRoutes from './AdminRoutes';
 import LockScreen from '../pages/Auth/LockScreen';
@@ -54,6 +57,9 @@ const Routers = () => {
 
       <Route path="/lock-screen" element={<LockScreen />} />
       <Route path="/admin/*" element={<AdminRoutes />} />
+
+      <Route path='/display-properties' element={<DisplayProperty />} />
+      <Route path='/display-properties/details' element={<PropertyDetails />} />
     </Routes>
 
   )

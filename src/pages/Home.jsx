@@ -5,6 +5,7 @@ import { FaSearch, FaChevronDown } from 'react-icons/fa';
 import FeaturePro from "../components/FeatureProject/FeaturePro";
 import SharePopup from '../components/Share/SharePopup';
 import ScheduleVisitForm from '../components/ScheduleVisit/ScheduleVisitForm';
+import { Link } from "react-router-dom";
 
 const Home = () => {
   // Search States
@@ -155,13 +156,17 @@ const Home = () => {
                 </div>
 
                 {/* Search Button */}
-                <button
-                  onClick={handleSearch}
-                  className="w-full sm:w-auto bg-red-500 text-white px-4 sm:px-8 py-2.5 rounded-lg hover:bg-red-600 transition-colors cursor-pointer active:scale-95 flex items-center justify-center gap-2"
-                >
-                  <FaSearch size={14} />
-                  <span>Search</span>
-                </button>
+                <Link to='/display-properties'>
+                  <button
+                    onClick={handleSearch}
+                    className="w-full sm:w-auto bg-red-500 text-white px-4 sm:px-8 py-2.5 rounded-lg hover:bg-red-600 transition-colors cursor-pointer active:scale-95 flex items-center justify-center gap-2"
+                  >
+                    <FaSearch size={14} />
+
+                    <span>Search</span>
+
+                  </button>
+                </Link>
               </div>
 
               {/* Property Filters based on active tab */}

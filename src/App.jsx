@@ -1,8 +1,11 @@
 import Layout from "./layout/Layout"
+import { SavedPropertiesProvider } from './context/SavedPropertiesContext'
 
 function App() {
   return (
-    <Layout />
+    <SavedPropertiesProvider>
+      <Layout />
+    </SavedPropertiesProvider>
   )
 }
 
